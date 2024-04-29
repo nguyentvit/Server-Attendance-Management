@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\AttendanceManagement.WebAPI.props" />
+</Project>

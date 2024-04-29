@@ -1,0 +1,13 @@
+E:\Pbl5\Server\Server-Attendance-Management\AttendanceManagementSolution\AttendanceManagement.Core\bin\Debug\net8.0\AttendanceManagement.Core.deps.json
+E:\Pbl5\Server\Server-Attendance-Management\AttendanceManagementSolution\AttendanceManagement.Core\bin\Debug\net8.0\AttendanceManagement.Core.dll
+E:\Pbl5\Server\Server-Attendance-Management\AttendanceManagementSolution\AttendanceManagement.Core\bin\Debug\net8.0\AttendanceManagement.Core.pdb
+E:\Pbl5\Server\Server-Attendance-Management\AttendanceManagementSolution\AttendanceManagement.Core\obj\Debug\net8.0\AttendanceManagement.Core.csproj.AssemblyReference.cache
+E:\Pbl5\Server\Server-Attendance-Management\AttendanceManagementSolution\AttendanceManagement.Core\obj\Debug\net8.0\AttendanceManagement.Core.GeneratedMSBuildEditorConfig.editorconfig
+E:\Pbl5\Server\Server-Attendance-Management\AttendanceManagementSolution\AttendanceManagement.Core\obj\Debug\net8.0\AttendanceManagement.Core.AssemblyInfoInputs.cache
+E:\Pbl5\Server\Server-Attendance-Management\AttendanceManagementSolution\AttendanceManagement.Core\obj\Debug\net8.0\AttendanceManagement.Core.AssemblyInfo.cs
+E:\Pbl5\Server\Server-Attendance-Management\AttendanceManagementSolution\AttendanceManagement.Core\obj\Debug\net8.0\AttendanceManagement.Core.csproj.CoreCompileInputs.cache
+E:\Pbl5\Server\Server-Attendance-Management\AttendanceManagementSolution\AttendanceManagement.Core\obj\Debug\net8.0\AttendanceManagement.Core.sourcelink.json
+E:\Pbl5\Server\Server-Attendance-Management\AttendanceManagementSolution\AttendanceManagement.Core\obj\Debug\net8.0\AttendanceManagement.Core.dll
+E:\Pbl5\Server\Server-Attendance-Management\AttendanceManagementSolution\AttendanceManagement.Core\obj\Debug\net8.0\refint\AttendanceManagement.Core.dll
+E:\Pbl5\Server\Server-Attendance-Management\AttendanceManagementSolution\AttendanceManagement.Core\obj\Debug\net8.0\AttendanceManagement.Core.pdb
+E:\Pbl5\Server\Server-Attendance-Management\AttendanceManagementSolution\AttendanceManagement.Core\obj\Debug\net8.0\ref\AttendanceManagement.Core.dll

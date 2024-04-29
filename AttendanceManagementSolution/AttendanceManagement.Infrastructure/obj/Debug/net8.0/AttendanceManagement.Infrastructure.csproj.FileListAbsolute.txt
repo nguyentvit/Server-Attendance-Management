@@ -1,0 +1,16 @@
+E:\Pbl5\Server\Server-Attendance-Management\AttendanceManagementSolution\AttendanceManagement.Infrastructure\bin\Debug\net8.0\AttendanceManagement.Infrastructure.deps.json
+E:\Pbl5\Server\Server-Attendance-Management\AttendanceManagementSolution\AttendanceManagement.Infrastructure\bin\Debug\net8.0\AttendanceManagement.Infrastructure.dll
+E:\Pbl5\Server\Server-Attendance-Management\AttendanceManagementSolution\AttendanceManagement.Infrastructure\bin\Debug\net8.0\AttendanceManagement.Infrastructure.pdb
+E:\Pbl5\Server\Server-Attendance-Management\AttendanceManagementSolution\AttendanceManagement.Infrastructure\bin\Debug\net8.0\AttendanceManagement.Core.dll
+E:\Pbl5\Server\Server-Attendance-Management\AttendanceManagementSolution\AttendanceManagement.Infrastructure\bin\Debug\net8.0\AttendanceManagement.Core.pdb
+E:\Pbl5\Server\Server-Attendance-Management\AttendanceManagementSolution\AttendanceManagement.Infrastructure\obj\Debug\net8.0\AttendanceManagement.Infrastructure.csproj.AssemblyReference.cache
+E:\Pbl5\Server\Server-Attendance-Management\AttendanceManagementSolution\AttendanceManagement.Infrastructure\obj\Debug\net8.0\AttendanceManagement.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+E:\Pbl5\Server\Server-Attendance-Management\AttendanceManagementSolution\AttendanceManagement.Infrastructure\obj\Debug\net8.0\AttendanceManagement.Infrastructure.AssemblyInfoInputs.cache
+E:\Pbl5\Server\Server-Attendance-Management\AttendanceManagementSolution\AttendanceManagement.Infrastructure\obj\Debug\net8.0\AttendanceManagement.Infrastructure.AssemblyInfo.cs
+E:\Pbl5\Server\Server-Attendance-Management\AttendanceManagementSolution\AttendanceManagement.Infrastructure\obj\Debug\net8.0\AttendanceManagement.Infrastructure.csproj.CoreCompileInputs.cache
+E:\Pbl5\Server\Server-Attendance-Management\AttendanceManagementSolution\AttendanceManagement.Infrastructure\obj\Debug\net8.0\AttendanceManagement.Infrastructure.sourcelink.json
+E:\Pbl5\Server\Server-Attendance-Management\AttendanceManagementSolution\AttendanceManagement.Infrastructure\obj\Debug\net8.0\Attendan.FF503183.Up2Date
+E:\Pbl5\Server\Server-Attendance-Management\AttendanceManagementSolution\AttendanceManagement.Infrastructure\obj\Debug\net8.0\AttendanceManagement.Infrastructure.dll
+E:\Pbl5\Server\Server-Attendance-Management\AttendanceManagementSolution\AttendanceManagement.Infrastructure\obj\Debug\net8.0\refint\AttendanceManagement.Infrastructure.dll
+E:\Pbl5\Server\Server-Attendance-Management\AttendanceManagementSolution\AttendanceManagement.Infrastructure\obj\Debug\net8.0\AttendanceManagement.Infrastructure.pdb
+E:\Pbl5\Server\Server-Attendance-Management\AttendanceManagementSolution\AttendanceManagement.Infrastructure\obj\Debug\net8.0\ref\AttendanceManagement.Infrastructure.dll

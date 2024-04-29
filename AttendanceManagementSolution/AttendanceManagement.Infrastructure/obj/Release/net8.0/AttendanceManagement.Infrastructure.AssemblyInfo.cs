@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AttendanceManagement.Infrastructure")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ba9e2cc7f0c79ca38d9dab2c6f4d5c33f4510cee")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+71053f1a2f3996d0fb3a42a23370ec75a5b84ad7")]
 [assembly: System.Reflection.AssemblyProductAttribute("AttendanceManagement.Infrastructure")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AttendanceManagement.Infrastructure")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
