@@ -24,7 +24,8 @@ builder.Services.AddControllers(options =>
     options.Filters.Add(new ProducesAttribute("application/json"));
     options.Filters.Add(new ConsumesAttribute("application/json"));
     options.Filters.Add(new AuthorizeFilter(policy));
-});
+})
+    .AddXmlSerializerFormatters();
 
 builder.Services.AddTransient<IJwtService, JwtService>();
 
@@ -37,7 +38,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
-    //options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "api.xml"));
+    options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "api.xml"));
 });
 
 //CORS
@@ -98,9 +99,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseSwagger();
-app.UseSwaggerUI(options =>
-{
-});
+app.UseSwaggerUI();
 
 app.UseRouting();
 app.UseCors();

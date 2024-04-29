@@ -1,10 +1,12 @@
 ﻿using AttendanceManagement.Core.DTO;
+using AttendanceManagement.Core.Enums;
 using AttendanceManagement.Core.Identity;
 using AttendanceManagement.Core.ServiceContracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
 
 namespace AttendanceManagement.WebAPI.Controllers
@@ -31,22 +33,43 @@ namespace AttendanceManagement.WebAPI.Controllers
             _jwtService = jwtService;
         }
         /// <summary>
-        /// 
+        /// Register account by fields (PersonName), (Email), (Gender: Male, Female, Other), (Address), (PhoneNumber), (Password), (ConfirmPassword)
         /// </summary>
         /// <param name="registerDTO"></param>
         /// <returns></returns>
         [HttpPost("register")]
         public async Task<ActionResult<ApplicationUser>> PostRegister(RegisterDTO registerDTO)
         {
-            if (!ModelState.IsValid)
+            //checkEmailExisted
+            var userEmailExisted = await _userManager.FindByEmailAsync(registerDTO.Email);
+            if (userEmailExisted != null)
+            {
+                ModelState.AddModelError("Email", "Email is already in use");
+            }
+
+            //checkPhoneNumberExisted
+            var userPhoneNumberExisted = await _userManager.Users.FirstOrDefaultAsync(u => u.PhoneNumber == registerDTO.PhoneNumber);
+            if (userPhoneNumberExisted != null)
+            {
+                ModelState.AddModelError("PhoneNumber", "Phone number is already in use");
+            }
+
+            if (ModelState.ErrorCount > 0)
             {
                 var errorList = ModelState.ToDictionary(
                     kvp => kvp.Key,
                     kvp => kvp.Value.Errors.Select(e => e.ErrorMessage).ToArray()
                     ).Where(m => m.Value.Any());
-                return BadRequest(errorList);
-            }
 
+                var customResponse = new CustomRequestResponse()
+                {
+                    errors = errorList.ToDictionary(kv => kv.Key, kv => kv.Value),
+                    status = 400,
+                    title = "One or more validation errors occurred"
+
+                };
+                return BadRequest(customResponse);
+            }
             ApplicationUser user = new ApplicationUser()
             {
                 Email = registerDTO.Email,
@@ -61,34 +84,129 @@ namespace AttendanceManagement.WebAPI.Controllers
 
             if (result.Succeeded)
             {
+                if (registerDTO.UserType == UserTypeOptions.Admin)
+                {
+                    if (await _roleManager.FindByNameAsync(UserTypeOptions.Admin.ToString()) is null)
+                    {
+                        ApplicationRole applicationRole = new ApplicationRole()
+                        {
+                            Name = UserTypeOptions.Admin.ToString(),
+                        };
+                        await _roleManager.CreateAsync(applicationRole);
+                    }
+
+                    await _userManager.AddToRoleAsync(user, UserTypeOptions.Admin.ToString());
+                }
+                else if (registerDTO.UserType == UserTypeOptions.User)
+                {
+                    if (await _roleManager.FindByNameAsync(UserTypeOptions.User.ToString()) is null)
+                    {
+                        ApplicationRole applicationRole = new ApplicationRole()
+                        {
+                            Name = UserTypeOptions.User.ToString(),
+                        };
+                        await _roleManager.CreateAsync(applicationRole);
+                    }
+
+                    await _userManager.AddToRoleAsync(user, UserTypeOptions.User.ToString());
+                }
+
                 return Ok(user);
             }
             else
             {
-                string errorMessage = string.Join(" | ", result.Errors.Select(e => e.Description)); 
-                return BadRequest(errorMessage);
+                string errorMessage = string.Join(" | ", result.Errors.Select(e => e.Description));
+                ModelState.AddModelError("Error", errorMessage);
+                return BadRequest(ModelState);
+            }
+        }
+        /// <summary>
+        /// Login by fields (Email), (Password)
+        /// </summary>
+        /// <param name="loginDTO"></param>
+        /// <returns></returns>
+        [HttpPost("login")]
+        public async Task<IActionResult> PostLogin(LoginDTO loginDTO)
+        {
+            if (ModelState.ErrorCount > 0)
+            {
+                var errorList = ModelState.ToDictionary(
+                    kvp => kvp.Key,
+                    kvp => kvp.Value.Errors.Select(e => e.ErrorMessage).ToArray()
+                    ).Where(m => m.Value.Any());
+
+                var customResponse = new CustomRequestResponse()
+                {
+                    errors = errorList.ToDictionary(kv => kv.Key, kv => kv.Value),
+                    status = 400,
+                    title = "One or more validation errors occurred"
+
+                };
+                return BadRequest(customResponse);
             }
 
-        }
-        [HttpPost]
-        public async Task<IActionResult> IsEmailAlreadyRegistered(string email)
-        {
-            var user = await _userManager.FindByEmailAsync(email);
-            return Ok(user == null);
-        }
-        [HttpGet]
-        public async Task<IActionResult> IsPhoneNumberAlreadyRegistered(string phoneNumber)
-        {
-            ApplicationUser? user = await _userManager.Users.FirstOrDefaultAsync(u => u.PhoneNumber == phoneNumber);
+            var result = await _signInManager.PasswordSignInAsync(loginDTO.Email, loginDTO.Password, isPersistent: false, lockoutOnFailure: false);
 
-            if (user == null)
+            if (result.Succeeded)
             {
-                return Ok(true);
+                ApplicationUser? user = await _userManager.FindByEmailAsync(loginDTO.Email);
+                if (user == null)
+                {
+                    return NoContent();
+                }
+
+                var authenicationResponse = _jwtService.CreateJwtToken(user);
+                return Ok(authenicationResponse);
             }
             else
             {
-                return Ok(false);
+                if (result.IsLockedOut)
+                {
+                    return BadRequest(new CustomRequestResponse()
+                    {
+                        status = 400,
+                        title = "Account is locked",
+                        errors = new Dictionary<string, string[]>
+                        {
+                            { "Lockout", new string[] { "Your account is locked. Please try again later." } }
+                        }
+                    });
+                }
+                else if (result.IsNotAllowed)
+                {
+                    return BadRequest(new CustomRequestResponse()
+                    {
+                        status = 400,
+                        title = "Account is not allowed",
+                        errors = new Dictionary<string, string[]>
+                        {
+                            { "NotAllowed", new string[] { "Your account is not allowed to login." } }
+                        }
+                    });
+                }
+                else
+                {
+                    return BadRequest(new CustomRequestResponse()
+                    {
+                        status = 400,
+                        title = "Invalid email or password",
+                        errors = new Dictionary<string, string[]>
+                        {
+                            { "InvalidCredentials", new string[] { "Invalid email or password." } }
+                        }
+                    });
+                }
             }
+        }
+        /// <summary>
+        /// No field
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("logout")]
+        public async Task<IActionResult> GetLogout()
+        {
+            await _signInManager.SignOutAsync();
+            return NoContent();
         }
     }
 }

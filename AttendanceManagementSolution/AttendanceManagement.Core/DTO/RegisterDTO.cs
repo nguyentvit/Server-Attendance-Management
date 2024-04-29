@@ -12,7 +12,6 @@ namespace AttendanceManagement.Core.DTO
 
         [Required(ErrorMessage = "Email can't be blank")]
         [EmailAddress(ErrorMessage = "Email should be in a proper email address format")]
-        [Remote(action: "IsEmailAlreadyRegistered", controller: "Account", ErrorMessage = "Email is already is use", HttpMethod = "POST")]
         public string Email { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "Gender can't be blank")]
@@ -24,7 +23,6 @@ namespace AttendanceManagement.Core.DTO
 
         [Required(ErrorMessage = "Phone Number can't be blank")]
         [RegularExpression("^[0-9]*$", ErrorMessage = "Phone number should contain digits only")]
-        [Remote(action: "IsPhoneNumberAlreadyRegistered", controller: "Account", ErrorMessage = "Phone Number is already is use")]
         public string PhoneNumber { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "Password can't be blank")]
@@ -33,5 +31,7 @@ namespace AttendanceManagement.Core.DTO
         [Required(ErrorMessage = "Confirm Password can't be blank")]
         [Compare("Password", ErrorMessage = "Password and confirm password do not match")]
         public string ConfirmPassword {  get; set; } = string.Empty;
+
+        public UserTypeOptions UserType { get; set; } = UserTypeOptions.Admin;
     }
 }
