@@ -18,48 +18,21 @@ namespace AttendanceManagement.Core.Services
         {
             _configuration = configuration;
         }
-        public AuthenticationResponse CreateJwtToken(ApplicationUser user)
+
+        public JwtSecurityToken CreateJwtToken(IEnumerable<Claim> claims)
         {
-            DateTime expiration = DateTime.UtcNow.AddMinutes(Convert.ToDouble(_configuration["Jwt:EXPIRATION_MINUTES"]));
+            byte[] keyBytes = Encoding.UTF8.GetBytes(_configuration["JWT:Secret"]);
+            double expires = Convert.ToDouble(_configuration["JWT:EXPIRATION_HOURS"]);
+            var authSigningKey = new SymmetricSecurityKey(keyBytes);
 
-            Claim[] claims = new Claim[]
-            {
-                new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString()),
-                new Claim(ClaimTypes.NameIdentifier, user.Email),
-                new Claim(ClaimTypes.Name, user.PersonName)
-            };
-
-            byte[] keyBytes = Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]);
-
-            using (SHA256 sha256 = SHA256.Create())
-            {
-                keyBytes = sha256.ComputeHash(keyBytes);
-            }
-
-            SymmetricSecurityKey securityKey = new SymmetricSecurityKey(keyBytes);
-
-            SigningCredentials signingCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
-
-            JwtSecurityToken tokenGenerator = new JwtSecurityToken(
-                _configuration["Jwt:Issuer"],
-                _configuration["Jwt:Audience"],
-                claims,
-                expires: expiration,
-                signingCredentials: signingCredentials
-                );
-
-            JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
-            string token = tokenHandler.WriteToken(tokenGenerator);
-
-            return new AuthenticationResponse()
-            {
-                Email = user.Email,
-                Expiration = expiration,
-                PersonName = user.PersonName,
-                Token = token,
-            };
+            var token = new JwtSecurityToken(
+                issuer: _configuration["JWT:ValidIssuer"],
+                audience: _configuration["JWT:ValidAudience"],
+                expires: DateTime.Now.AddHours(expires),
+                claims: claims,
+                signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
+            );
+            return token;
         }
     }
 }

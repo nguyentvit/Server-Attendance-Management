@@ -4,6 +4,11 @@
         <name>AttendanceManagement.WebAPI</name>
     </assembly>
     <members>
+        <member name="T:AttendanceManagement.WebAPI.Controllers.AccountController">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="M:AttendanceManagement.WebAPI.Controllers.AccountController.#ctor(Microsoft.AspNetCore.Identity.UserManager{AttendanceManagement.Core.Identity.ApplicationUser},Microsoft.AspNetCore.Identity.SignInManager{AttendanceManagement.Core.Identity.ApplicationUser},Microsoft.AspNetCore.Identity.RoleManager{AttendanceManagement.Core.Identity.ApplicationRole},AttendanceManagement.Core.ServiceContracts.IJwtService)">
             <summary>
             
@@ -30,6 +35,23 @@
         <member name="M:AttendanceManagement.WebAPI.Controllers.AccountController.GetLogout">
             <summary>
             No field
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:AttendanceManagement.WebAPI.Controllers.DepartmentsController">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:AttendanceManagement.WebAPI.Controllers.DepartmentsController.#ctor(AttendanceManagement.Core.ServiceContracts.IDepartmentService)">
+            <summary>
+            
+            </summary>
+            <param name="departmentsService"></param>
+        </member>
+        <member name="M:AttendanceManagement.WebAPI.Controllers.DepartmentsController.GetAllDepartments">
+            <summary>
+            
             </summary>
             <returns></returns>
         </member>
