@@ -10,3 +10,5 @@
 - From the toolbar, select View -> SQL Server Object Explorer
 - On the SQL Server Object Explorer, select SQL Server ->  the first row -> right click Databases -> Add New Database -> Name database is "AttendanceManagement"
 - Run project
+- If you had fault about your sdk .net version => - Open Visual Studio Installer, after update visual studio existed
+- When you run project, if you get fault about ssl certificate, you can change run by http in button run
