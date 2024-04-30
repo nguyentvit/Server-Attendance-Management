@@ -23,12 +23,26 @@ namespace AttendanceManagement.Infrastructure.Repositories
             return department;
         }
 
+        public async Task<Department?> DeleteDepartment(Guid departmentId)
+        {
+            var department = await _db.Departments.FindAsync(departmentId);
+            if (department == null) 
+            { 
+                return null;
+            }
+
+            _db.Departments.Remove(department);
+            await _db.SaveChangesAsync();
+
+            return department;
+        }
+
         public async Task<List<Department>> GetAllDepartments()
         {
             return await _db.Departments.ToListAsync();
         }
 
-        public async Task<Department?> GetDepartmentByDepartmentId(Guid departmentId)
+        public async Task<Department?> GetDepartment(Guid departmentId)
         {
             return await _db.Departments.FirstOrDefaultAsync(temp => temp.DepartmentId == departmentId);
         }
@@ -38,13 +52,13 @@ namespace AttendanceManagement.Infrastructure.Repositories
             throw new NotImplementedException();
         }
 
-        public async Task<Department> UpdateDepartment(Department department)
+        public async Task<Department?> UpdateDepartment(Department department)
         {
             Department? matchingDepartment = await _db.Departments.FirstOrDefaultAsync(temp => temp.DepartmentId == department.DepartmentId);
 
             if (matchingDepartment == null) 
             {
-                return department;
+                return null;
             }
 
             matchingDepartment.DepartmentName = department.DepartmentName;

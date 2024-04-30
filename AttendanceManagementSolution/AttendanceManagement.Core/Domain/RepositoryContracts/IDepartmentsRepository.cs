@@ -12,8 +12,9 @@ namespace AttendanceManagement.Core.Domain.RepositoryContracts
     {
         Task<List<Department>> GetAllDepartments();
         Task<Department> AddDepartment(Department department);
-        Task<Department?> GetDepartmentByDepartmentId(Guid departmentId);
-        Task<Department> UpdateDepartment(Department department);
+        Task<Department?> GetDepartment(Guid departmentId);
+        Task<Department?> UpdateDepartment(Department department);
         Task<List<Department>> GetFilteredDepartments(Expression<Func<Department, bool>> predicate);
+        Task<Department?> DeleteDepartment(Guid departmentId);
     }
 }

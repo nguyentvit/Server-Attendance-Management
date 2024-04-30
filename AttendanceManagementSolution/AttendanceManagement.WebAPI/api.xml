@@ -55,5 +55,34 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:AttendanceManagement.WebAPI.Controllers.DepartmentsController.GetDepartment(System.Guid)">
+            <summary>
+            
+            </summary>
+            <param name="departmentId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AttendanceManagement.WebAPI.Controllers.DepartmentsController.AddDepartment(AttendanceManagement.Core.Domain.Entities.Department)">
+            <summary>
+            
+            </summary>
+            <param name="department"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AttendanceManagement.WebAPI.Controllers.DepartmentsController.UpdateDepartment(System.Guid,AttendanceManagement.Core.Domain.Entities.Department)">
+            <summary>
+            
+            </summary>
+            <param name="departmentId"></param>
+            <param name="department"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AttendanceManagement.WebAPI.Controllers.DepartmentsController.DeleteDeparment(System.Guid)">
+            <summary>
+            
+            </summary>
+            <param name="departmentId"></param>
+            <returns></returns>
+        </member>
     </members>
 </doc>

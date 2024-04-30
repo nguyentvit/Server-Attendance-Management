@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using AttendanceManagement.Core.Domain.Entities;
+using Microsoft.AspNetCore.Identity;
 using System;
 
 namespace AttendanceManagement.Core.Identity
