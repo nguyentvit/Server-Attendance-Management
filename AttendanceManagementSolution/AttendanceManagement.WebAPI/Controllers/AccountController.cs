@@ -8,9 +8,14 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 
 namespace AttendanceManagement.WebAPI.Controllers
-{
+{   
+    /// <summary>
+    /// 
+    /// </summary>
     [AllowAnonymous]
     public class AccountController : CustomControllersBase
     {
@@ -155,8 +160,24 @@ namespace AttendanceManagement.WebAPI.Controllers
                     return NoContent();
                 }
 
-                var authenicationResponse = _jwtService.CreateJwtToken(user);
-                return Ok(authenicationResponse);
+                var userRoles = await _userManager.GetRolesAsync(user);
+                var authClaims = new List<Claim> 
+                { 
+                    new Claim(ClaimTypes.Name, user.UserName),
+                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+                };
+
+                foreach(var userRole in userRoles)
+                {
+                    authClaims.Add(new Claim(ClaimTypes.Role, userRole));
+                }
+
+                var token = _jwtService.CreateJwtToken(authClaims);
+                return Ok(new
+                {
+                    token = new JwtSecurityTokenHandler().WriteToken(token),
+                    expiration = token.ValidTo
+                });
             }
             else
             {

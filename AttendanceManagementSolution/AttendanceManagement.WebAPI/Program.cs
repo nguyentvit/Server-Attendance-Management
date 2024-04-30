@@ -1,7 +1,10 @@
+using AttendanceManagement.Core.Domain.RepositoryContracts;
 using AttendanceManagement.Core.Identity;
 using AttendanceManagement.Core.ServiceContracts;
 using AttendanceManagement.Core.Services;
 using AttendanceManagement.Infrastructure.DatabaseContext;
+using AttendanceManagement.Infrastructure.Repositories;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -18,9 +21,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers(options =>
 {
     //Authorization policy
-    var policy = new AuthorizationPolicyBuilder()
-                        .RequireAuthenticatedUser()
-                        .Build();
+    var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
     options.Filters.Add(new ProducesAttribute("application/json"));
     options.Filters.Add(new ConsumesAttribute("application/json"));
     options.Filters.Add(new AuthorizeFilter(policy));
@@ -28,6 +29,8 @@ builder.Services.AddControllers(options =>
     .AddXmlSerializerFormatters();
 
 builder.Services.AddTransient<IJwtService, JwtService>();
+builder.Services.AddTransient<IDepartmentsRepository, DepartmentsRepository>();
+builder.Services.AddTransient<IDepartmentService, DepartmentService>();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
@@ -48,7 +51,7 @@ builder.Services.AddCors(options =>
     {
         policyBuilder
             .WithOrigins(builder.Configuration.GetSection("AllowedOrigins").Get<string[]>())
-            .WithHeaders("Authorization", "origin", "accept")
+            .WithHeaders("Authorization", "origin", "accept", "content-type")
             .WithMethods("GET", "POST", "PUT", "DELETE");
     });
 });
@@ -69,27 +72,26 @@ builder.Services
     .AddRoleStore<RoleStore<ApplicationRole, ApplicationDbContext, Guid>>();
 
 //JWT
-builder.Services
-    .AddAuthentication(options =>
-        {
-            options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-            options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-        })
-    .AddJwtBearer(options =>
-    {
-        options.TokenValidationParameters = new TokenValidationParameters()
-        {
-            ValidateAudience = true,
-            ValidAudience = builder.Configuration["Jwt:Audience"],
-            ValidateIssuer = true,
-            ValidIssuer = builder.Configuration["Jwt:Issuer"],
-            ValidateLifetime = true,
-            ValidateIssuerSigningKey = true,
-            IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
-        };
-    });
+builder.Services.AddAuthentication(options => {
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+ .AddJwtBearer(options => {
+     options.SaveToken = true;
+     options.RequireHttpsMetadata = false;
+     options.TokenValidationParameters = new TokenValidationParameters()
+     {
+         ValidateIssuer = true,
+         ValidateAudience = true,
+         ValidAudience = builder.Configuration["JWT:ValidAudience"],
+         ValidIssuer = builder.Configuration["JWT:ValidIssuer"],
+         IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(builder.Configuration["JWT:Secret"]))
+     };
+ });
 
-builder.Services.AddAuthorization(options => { });
+builder.Services.AddAuthorization(options => {
+});
 
 var app = builder.Build();
 

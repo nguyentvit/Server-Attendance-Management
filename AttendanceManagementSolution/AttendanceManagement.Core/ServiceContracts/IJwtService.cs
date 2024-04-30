@@ -1,15 +1,12 @@
-﻿using AttendanceManagement.Core.DTO;
-using AttendanceManagement.Core.Identity;
+﻿using AttendanceManagement.Core.Identity;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 
 namespace AttendanceManagement.Core.ServiceContracts
 {
     public interface IJwtService
     {
-        AuthenticationResponse CreateJwtToken(ApplicationUser user);
+        JwtSecurityToken CreateJwtToken(IEnumerable<Claim> claims);
     }
 }
