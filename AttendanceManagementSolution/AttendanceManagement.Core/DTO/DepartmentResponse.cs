@@ -1,4 +1,5 @@
 ﻿using AttendanceManagement.Core.Domain.Entities;
+using AttendanceManagement.Core.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,7 @@ namespace AttendanceManagement.Core.DTO
     {
         public Guid DepartmentId { get; set; }
         public string DepartmentName { get; set;} = string.Empty;
+        public List<RegisterDTO> Users { get; set; } = new List<RegisterDTO>();
         public override bool Equals(object? obj)
         {
             if (obj == null)
@@ -35,10 +37,16 @@ namespace AttendanceManagement.Core.DTO
     {
         public static DepartmentResponse ToDepartmentResponse(this Department department)
         {
+            List<ApplicationUser> users = department.Users.ToList();
+            List<RegisterDTO> userToRegisterDTO = users.Select(u => new RegisterDTO
+            {
+                PersonName = u.PersonName,
+            }).ToList();
             return new DepartmentResponse()
             {
                 DepartmentId = department.DepartmentId,
                 DepartmentName = department.DepartmentName,
+                Users = userToRegisterDTO
             };
         }
     }

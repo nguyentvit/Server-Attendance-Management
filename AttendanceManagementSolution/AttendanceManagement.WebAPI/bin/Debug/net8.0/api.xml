@@ -9,7 +9,7 @@
             
             </summary>
         </member>
-        <member name="M:AttendanceManagement.WebAPI.Controllers.AccountController.#ctor(Microsoft.AspNetCore.Identity.UserManager{AttendanceManagement.Core.Identity.ApplicationUser},Microsoft.AspNetCore.Identity.SignInManager{AttendanceManagement.Core.Identity.ApplicationUser},Microsoft.AspNetCore.Identity.RoleManager{AttendanceManagement.Core.Identity.ApplicationRole},AttendanceManagement.Core.ServiceContracts.IJwtService)">
+        <member name="M:AttendanceManagement.WebAPI.Controllers.AccountController.#ctor(Microsoft.AspNetCore.Identity.UserManager{AttendanceManagement.Core.Identity.ApplicationUser},Microsoft.AspNetCore.Identity.SignInManager{AttendanceManagement.Core.Identity.ApplicationUser},Microsoft.AspNetCore.Identity.RoleManager{AttendanceManagement.Core.Identity.ApplicationRole},AttendanceManagement.Core.ServiceContracts.IJwtService,AttendanceManagement.Core.ServiceContracts.IDepartmentService)">
             <summary>
             
             </summary>
@@ -17,6 +17,7 @@
             <param name="signInManager"></param>
             <param name="roleManager"></param>
             <param name="jwtService"></param>
+            <param name="departmentService"></param>
         </member>
         <member name="M:AttendanceManagement.WebAPI.Controllers.AccountController.PostRegister(AttendanceManagement.Core.DTO.RegisterDTO)">
             <summary>
@@ -36,6 +37,13 @@
             <summary>
             No field
             </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AttendanceManagement.WebAPI.Controllers.AccountController.PostRegisterUser(AttendanceManagement.Core.DTO.RegisterDTO)">
+            <summary>
+            
+            </summary>
+            <param name="registerDTO"></param>
             <returns></returns>
         </member>
         <member name="T:AttendanceManagement.WebAPI.Controllers.DepartmentsController">

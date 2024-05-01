@@ -33,5 +33,6 @@ namespace AttendanceManagement.Core.DTO
         public string ConfirmPassword {  get; set; } = string.Empty;
 
         public UserTypeOptions UserType { get; set; } = UserTypeOptions.Admin;
+        public Guid DepartmentId {  get; set; } = Guid.Empty;
     }
 }

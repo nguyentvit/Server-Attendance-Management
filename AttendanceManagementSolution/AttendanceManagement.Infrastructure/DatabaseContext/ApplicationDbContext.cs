@@ -26,6 +26,12 @@ namespace AttendanceManagement.Infrastructure.DatabaseContext
                 DepartmentId = Guid.Parse("EF90FD8F-AAEA-444E-B3A0-78B56D6C51F8"),
                 DepartmentName = "Accounting"
             });
+
+            builder.Entity<Department>()
+                .HasMany(d => d.Users)
+                .WithOne(d => d.Department)
+                .HasForeignKey(u => u.DeparmentId)
+                .IsRequired(false);
         }
     }
 }

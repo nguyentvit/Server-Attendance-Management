@@ -17,6 +17,7 @@ namespace AttendanceManagement.Core.Services
         public async Task<List<DepartmentResponse>> GetAllDepartments()
         {
             List<Department> departments = await _departmentsRepository.GetAllDepartments();
+
             return departments.Select(department => department.ToDepartmentResponse()).ToList();
         }
 

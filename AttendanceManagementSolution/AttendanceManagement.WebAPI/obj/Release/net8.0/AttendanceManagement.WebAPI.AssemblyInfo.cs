@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AttendanceManagement.WebAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1f06015100f7c96fc669182f18c20428205f0494")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+08ef242cca266a9f070bed8b038c6e3f6359d0eb")]
 [assembly: System.Reflection.AssemblyProductAttribute("AttendanceManagement.WebAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AttendanceManagement.WebAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
