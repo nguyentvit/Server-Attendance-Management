@@ -11,6 +11,8 @@ namespace AttendanceManagement.Infrastructure.DatabaseContext
         public ApplicationDbContext(DbContextOptions options) : base(options) { }
         public ApplicationDbContext() { }
         public virtual DbSet<Department> Departments { get; set; }
+        public virtual DbSet<Shift> Shifts { get; set; }
+        public virtual DbSet<Attendance> Attendances { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -32,6 +34,18 @@ namespace AttendanceManagement.Infrastructure.DatabaseContext
                 .WithOne(d => d.Department)
                 .HasForeignKey(u => u.DeparmentId)
                 .IsRequired(false);
+
+            builder.Entity<Department>()
+                .HasMany(d => d.Shifts)
+                .WithOne(e => e.Department)
+                .HasForeignKey(e => e.DepartmentId)
+                .IsRequired();
+
+            builder.Entity<Attendance>()
+                .HasOne(a => a.User)
+                .WithMany(a => a.Attendances)
+                .HasForeignKey(a => a.UserId)
+                .IsRequired();
         }
     }
 }

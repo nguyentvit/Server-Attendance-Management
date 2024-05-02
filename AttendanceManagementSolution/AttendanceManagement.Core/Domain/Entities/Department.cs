@@ -15,5 +15,6 @@ namespace AttendanceManagement.Core.Domain.Entities
         [Required(ErrorMessage = "Department Name can't be blank")]
         public string DepartmentName { get; set; } = string.Empty;
         public ICollection<ApplicationUser> Users { get; } = new List<ApplicationUser>();
+        public ICollection<Shift> Shifts { get; } = new List<Shift>();
     }
 }
