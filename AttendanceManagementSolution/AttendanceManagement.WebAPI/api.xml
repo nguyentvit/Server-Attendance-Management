@@ -9,7 +9,7 @@
             
             </summary>
         </member>
-        <member name="M:AttendanceManagement.WebAPI.Controllers.AccountController.#ctor(Microsoft.AspNetCore.Identity.UserManager{AttendanceManagement.Core.Identity.ApplicationUser},Microsoft.AspNetCore.Identity.SignInManager{AttendanceManagement.Core.Identity.ApplicationUser},Microsoft.AspNetCore.Identity.RoleManager{AttendanceManagement.Core.Identity.ApplicationRole},AttendanceManagement.Core.ServiceContracts.IJwtService)">
+        <member name="M:AttendanceManagement.WebAPI.Controllers.AccountController.#ctor(Microsoft.AspNetCore.Identity.UserManager{AttendanceManagement.Core.Identity.ApplicationUser},Microsoft.AspNetCore.Identity.SignInManager{AttendanceManagement.Core.Identity.ApplicationUser},Microsoft.AspNetCore.Identity.RoleManager{AttendanceManagement.Core.Identity.ApplicationRole},AttendanceManagement.Core.ServiceContracts.IJwtService,AttendanceManagement.Core.ServiceContracts.IDepartmentService)">
             <summary>
             
             </summary>
@@ -17,6 +17,7 @@
             <param name="signInManager"></param>
             <param name="roleManager"></param>
             <param name="jwtService"></param>
+            <param name="departmentService"></param>
         </member>
         <member name="M:AttendanceManagement.WebAPI.Controllers.AccountController.PostRegister(AttendanceManagement.Core.DTO.RegisterDTO)">
             <summary>
@@ -36,6 +37,51 @@
             <summary>
             No field
             </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AttendanceManagement.WebAPI.Controllers.AccountController.PostRegisterUser(AttendanceManagement.Core.DTO.RegisterDTO)">
+            <summary>
+            
+            </summary>
+            <param name="registerDTO"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AttendanceManagement.WebAPI.Controllers.AttendancesController">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:AttendanceManagement.WebAPI.Controllers.AttendancesController.#ctor(AttendanceManagement.Core.ServiceContracts.IAttendanceService)">
+            <summary>
+            
+            </summary>
+            <param name="attendanceService"></param>
+        </member>
+        <member name="M:AttendanceManagement.WebAPI.Controllers.AttendancesController.GetAllAttendance">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AttendanceManagement.WebAPI.Controllers.AttendancesController.GetAttendance(System.Guid)">
+            <summary>
+            
+            </summary>
+            <param name="attendanceId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AttendanceManagement.WebAPI.Controllers.AttendancesController.AddAttendance(AttendanceManagement.Core.DTO.AttendanceDTO)">
+            <summary>
+            
+            </summary>
+            <param name="attendanceDTO"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AttendanceManagement.WebAPI.Controllers.AttendancesController.GetHeHe(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="date"></param>
             <returns></returns>
         </member>
         <member name="T:AttendanceManagement.WebAPI.Controllers.DepartmentsController">
@@ -82,6 +128,71 @@
             
             </summary>
             <param name="departmentId"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AttendanceManagement.WebAPI.Controllers.ShiftsController">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:AttendanceManagement.WebAPI.Controllers.ShiftsController.#ctor(AttendanceManagement.Core.ServiceContracts.IShiftService,AttendanceManagement.Core.ServiceContracts.IDepartmentService)">
+            <summary>
+            
+            </summary>
+            <param name="shiftService"></param>
+        </member>
+        <member name="M:AttendanceManagement.WebAPI.Controllers.ShiftsController.GetAllShifts">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AttendanceManagement.WebAPI.Controllers.ShiftsController.GetShift(System.Guid)">
+            <summary>
+            
+            </summary>
+            <param name="shiftId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AttendanceManagement.WebAPI.Controllers.ShiftsController.AddShift(AttendanceManagement.Core.DTO.ShiftDTO)">
+            <summary>
+            
+            </summary>
+            <param name="shiftDTO"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AttendanceManagement.WebAPI.Controllers.ShiftsController.PutShift(System.Guid,AttendanceManagement.Core.DTO.ShiftUpdateDTO)">
+            <summary>
+            
+            </summary>
+            <param name="shiftId"></param>
+            <param name="shiftUpdateDTO"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AttendanceManagement.WebAPI.Controllers.UsersController">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:AttendanceManagement.WebAPI.Controllers.UsersController.GetAllUsers">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AttendanceManagement.WebAPI.Controllers.UsersController.GetUser(System.Guid)">
+            <summary>
+            
+            </summary>
+            <param name="userId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AttendanceManagement.WebAPI.Controllers.UsersController.GetAttendanceOfUserByDate(System.Guid,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="userId"></param>
+            <param name="date"></param>
             <returns></returns>
         </member>
     </members>

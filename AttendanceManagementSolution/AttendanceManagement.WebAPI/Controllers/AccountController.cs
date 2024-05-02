@@ -1,4 +1,5 @@
-﻿using AttendanceManagement.Core.DTO;
+﻿using AttendanceManagement.Core.Domain.Entities;
+using AttendanceManagement.Core.DTO;
 using AttendanceManagement.Core.Enums;
 using AttendanceManagement.Core.Identity;
 using AttendanceManagement.Core.ServiceContracts;
@@ -8,20 +9,24 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace AttendanceManagement.WebAPI.Controllers
 {   
     /// <summary>
     /// 
     /// </summary>
-    [AllowAnonymous]
+    [Authorize(Roles = "Admin")]
     public class AccountController : CustomControllersBase
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly RoleManager<ApplicationRole> _roleManager;
+        private readonly IDepartmentService _departmentService;
         private readonly IJwtService _jwtService;
         /// <summary>
         /// 
@@ -30,12 +35,14 @@ namespace AttendanceManagement.WebAPI.Controllers
         /// <param name="signInManager"></param>
         /// <param name="roleManager"></param>
         /// <param name="jwtService"></param>
-        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, RoleManager<ApplicationRole> roleManager, IJwtService jwtService)
+        /// <param name="departmentService"></param>
+        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, RoleManager<ApplicationRole> roleManager, IJwtService jwtService, IDepartmentService departmentService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _roleManager = roleManager;
             _jwtService = jwtService;
+            _departmentService=departmentService;
         }
         /// <summary>
         /// Register account by fields (PersonName), (Email), (Gender: Male, Female, Other), (Address), (PhoneNumber), (Password), (ConfirmPassword)
@@ -43,6 +50,7 @@ namespace AttendanceManagement.WebAPI.Controllers
         /// <param name="registerDTO"></param>
         /// <returns></returns>
         [HttpPost("register")]
+        [AllowAnonymous]
         public async Task<ActionResult<ApplicationUser>> PostRegister(RegisterDTO registerDTO)
         {
             //checkEmailExisted
@@ -131,6 +139,7 @@ namespace AttendanceManagement.WebAPI.Controllers
         /// <param name="loginDTO"></param>
         /// <returns></returns>
         [HttpPost("login")]
+        [AllowAnonymous]
         public async Task<IActionResult> PostLogin(LoginDTO loginDTO)
         {
             if (ModelState.ErrorCount > 0)
@@ -176,7 +185,8 @@ namespace AttendanceManagement.WebAPI.Controllers
                 return Ok(new
                 {
                     token = new JwtSecurityTokenHandler().WriteToken(token),
-                    expiration = token.ValidTo
+                    expiration = token.ValidTo,
+                    status = 200
                 });
             }
             else
@@ -224,10 +234,100 @@ namespace AttendanceManagement.WebAPI.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet("logout")]
+        [AllowAnonymous]
         public async Task<IActionResult> GetLogout()
         {
             await _signInManager.SignOutAsync();
             return NoContent();
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="registerDTO"></param>
+        /// <returns></returns>
+        [HttpPost("registerUser")]
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult<ApplicationUser>> PostRegisterUser(RegisterDTO registerDTO)
+        {
+            //checkEmailExisted
+            var userEmailExisted = await _userManager.FindByEmailAsync(registerDTO.Email);
+            if (userEmailExisted != null)
+            {
+                ModelState.AddModelError("Email", "Email is already in use");
+            }
+
+            //checkPhoneNumberExisted
+            var userPhoneNumberExisted = await _userManager.Users.FirstOrDefaultAsync(u => u.PhoneNumber == registerDTO.PhoneNumber);
+            if (userPhoneNumberExisted != null)
+            {
+                ModelState.AddModelError("PhoneNumber", "Phone number is already in use");
+            }
+
+            if (ModelState.ErrorCount > 0)
+            {
+                var errorList = ModelState.ToDictionary(
+                    kvp => kvp.Key,
+                    kvp => kvp.Value.Errors.Select(e => e.ErrorMessage).ToArray()
+                    ).Where(m => m.Value.Any());
+
+                var customResponse = new CustomRequestResponse()
+                {
+                    errors = errorList.ToDictionary(kv => kv.Key, kv => kv.Value),
+                    status = 400,
+                    title = "One or more validation errors occurred"
+
+                };
+                return BadRequest(customResponse);
+            }
+            ApplicationUser user = new ApplicationUser()
+            {
+                Email = registerDTO.Email,
+                PhoneNumber = registerDTO.PhoneNumber,
+                UserName = registerDTO.Email,
+                PersonName = registerDTO.PersonName,
+                Gender = registerDTO.Gender,
+                Address = registerDTO.Address,
+                DeparmentId = registerDTO.DepartmentId
+            };
+
+            IdentityResult result = await _userManager.CreateAsync(user, registerDTO.Password);
+
+            if (result.Succeeded)
+            {
+                if (registerDTO.UserType == UserTypeOptions.Admin)
+                {
+                    if (await _roleManager.FindByNameAsync(UserTypeOptions.Admin.ToString()) is null)
+                    {
+                        ApplicationRole applicationRole = new ApplicationRole()
+                        {
+                            Name = UserTypeOptions.Admin.ToString(),
+                        };
+                        await _roleManager.CreateAsync(applicationRole);
+                    }
+
+                    await _userManager.AddToRoleAsync(user, UserTypeOptions.Admin.ToString());
+                }
+                else if (registerDTO.UserType == UserTypeOptions.User)
+                {
+                    if (await _roleManager.FindByNameAsync(UserTypeOptions.User.ToString()) is null)
+                    {
+                        ApplicationRole applicationRole = new ApplicationRole()
+                        {
+                            Name = UserTypeOptions.User.ToString(),
+                        };
+                        await _roleManager.CreateAsync(applicationRole);
+                    }
+
+                    await _userManager.AddToRoleAsync(user, UserTypeOptions.User.ToString());
+                }
+                return Ok(user);
+            }
+            else
+            {
+                string errorMessage = string.Join(" | ", result.Errors.Select(e => e.Description));
+                ModelState.AddModelError("Error", errorMessage);
+                return BadRequest(ModelState);
+            }
         }
     }
 }

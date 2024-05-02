@@ -1,5 +1,6 @@
 ﻿using AttendanceManagement.Core.Domain.Entities;
 using AttendanceManagement.Core.Domain.RepositoryContracts;
+using AttendanceManagement.Core.Identity;
 using AttendanceManagement.Infrastructure.DatabaseContext;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -14,7 +15,6 @@ namespace AttendanceManagement.Infrastructure.Repositories
         {
             _db = db;
         }
-
         public async Task<Department> AddDepartment(Department department)
         {
             _db.Departments.Add(department);
@@ -39,12 +39,13 @@ namespace AttendanceManagement.Infrastructure.Repositories
 
         public async Task<List<Department>> GetAllDepartments()
         {
-            return await _db.Departments.ToListAsync();
+            return await _db.Departments.Include(d => d.Users).Include(d => d.Shifts).ToListAsync();
         }
 
         public async Task<Department?> GetDepartment(Guid departmentId)
         {
-            return await _db.Departments.FirstOrDefaultAsync(temp => temp.DepartmentId == departmentId);
+            var department = await _db.Departments.Include(d => d.Users).Include(d => d.Shifts).FirstOrDefaultAsync(d => d.DepartmentId == departmentId);
+            return department;
         }
 
         public Task<List<Department>> GetFilteredDepartments(Expression<Func<Department, bool>> predicate)

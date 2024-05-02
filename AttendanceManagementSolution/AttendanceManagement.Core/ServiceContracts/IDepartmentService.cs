@@ -1,15 +1,12 @@
 ﻿using AttendanceManagement.Core.Domain.Entities;
 using AttendanceManagement.Core.DTO;
+using AttendanceManagement.Core.Identity;
 using System;
 
 namespace AttendanceManagement.Core.ServiceContracts
 {
     public interface IDepartmentService
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
         Task<List<DepartmentResponse>> GetAllDepartments();
         Task<DepartmentResponse?> GetDepartment(Guid Id);
         Task<DepartmentResponse> AddDepartment(Department Department);

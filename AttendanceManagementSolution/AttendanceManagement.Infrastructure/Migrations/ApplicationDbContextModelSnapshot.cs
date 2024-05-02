@@ -22,7 +22,29 @@ namespace AttendanceManagement.Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("AttendanceManagement.Core.Entities.Department", b =>
+            modelBuilder.Entity("AttendanceManagement.Core.Domain.Entities.Attendance", b =>
+                {
+                    b.Property<Guid>("AttendanceId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("Time")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("AttendanceId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Attendances");
+                });
+
+            modelBuilder.Entity("AttendanceManagement.Core.Domain.Entities.Department", b =>
                 {
                     b.Property<Guid>("DepartmentId")
                         .ValueGeneratedOnAdd()
@@ -47,6 +69,32 @@ namespace AttendanceManagement.Infrastructure.Migrations
                             DepartmentId = new Guid("ef90fd8f-aaea-444e-b3a0-78b56d6c51f8"),
                             DepartmentName = "Accounting"
                         });
+                });
+
+            modelBuilder.Entity("AttendanceManagement.Core.Domain.Entities.Shift", b =>
+                {
+                    b.Property<Guid>("ShiftId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("DepartmentId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ShiftName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<TimeSpan>("Time_In")
+                        .HasColumnType("time");
+
+                    b.Property<TimeSpan>("Time_Out")
+                        .HasColumnType("time");
+
+                    b.HasKey("ShiftId");
+
+                    b.HasIndex("DepartmentId");
+
+                    b.ToTable("Shifts");
                 });
 
             modelBuilder.Entity("AttendanceManagement.Core.Identity.ApplicationRole", b =>
@@ -93,6 +141,9 @@ namespace AttendanceManagement.Infrastructure.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("DeparmentId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256)
@@ -143,6 +194,8 @@ namespace AttendanceManagement.Infrastructure.Migrations
                         .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("DeparmentId");
 
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
@@ -258,6 +311,37 @@ namespace AttendanceManagement.Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("AttendanceManagement.Core.Domain.Entities.Attendance", b =>
+                {
+                    b.HasOne("AttendanceManagement.Core.Identity.ApplicationUser", "User")
+                        .WithMany("Attendances")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("AttendanceManagement.Core.Domain.Entities.Shift", b =>
+                {
+                    b.HasOne("AttendanceManagement.Core.Domain.Entities.Department", "Department")
+                        .WithMany("Shifts")
+                        .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Department");
+                });
+
+            modelBuilder.Entity("AttendanceManagement.Core.Identity.ApplicationUser", b =>
+                {
+                    b.HasOne("AttendanceManagement.Core.Domain.Entities.Department", "Department")
+                        .WithMany("Users")
+                        .HasForeignKey("DeparmentId");
+
+                    b.Navigation("Department");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
                 {
                     b.HasOne("AttendanceManagement.Core.Identity.ApplicationRole", null)
@@ -307,6 +391,18 @@ namespace AttendanceManagement.Infrastructure.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("AttendanceManagement.Core.Domain.Entities.Department", b =>
+                {
+                    b.Navigation("Shifts");
+
+                    b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("AttendanceManagement.Core.Identity.ApplicationUser", b =>
+                {
+                    b.Navigation("Attendances");
                 });
 #pragma warning restore 612, 618
         }

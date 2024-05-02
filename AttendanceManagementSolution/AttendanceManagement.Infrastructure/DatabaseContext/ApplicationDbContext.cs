@@ -11,6 +11,8 @@ namespace AttendanceManagement.Infrastructure.DatabaseContext
         public ApplicationDbContext(DbContextOptions options) : base(options) { }
         public ApplicationDbContext() { }
         public virtual DbSet<Department> Departments { get; set; }
+        public virtual DbSet<Shift> Shifts { get; set; }
+        public virtual DbSet<Attendance> Attendances { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -26,6 +28,24 @@ namespace AttendanceManagement.Infrastructure.DatabaseContext
                 DepartmentId = Guid.Parse("EF90FD8F-AAEA-444E-B3A0-78B56D6C51F8"),
                 DepartmentName = "Accounting"
             });
+
+            builder.Entity<Department>()
+                .HasMany(d => d.Users)
+                .WithOne(d => d.Department)
+                .HasForeignKey(u => u.DeparmentId)
+                .IsRequired(false);
+
+            builder.Entity<Department>()
+                .HasMany(d => d.Shifts)
+                .WithOne(e => e.Department)
+                .HasForeignKey(e => e.DepartmentId)
+                .IsRequired();
+
+            builder.Entity<Attendance>()
+                .HasOne(a => a.User)
+                .WithMany(a => a.Attendances)
+                .HasForeignKey(a => a.UserId)
+                .IsRequired();
         }
     }
 }

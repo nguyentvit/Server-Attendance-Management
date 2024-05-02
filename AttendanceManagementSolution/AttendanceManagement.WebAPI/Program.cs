@@ -4,7 +4,6 @@ using AttendanceManagement.Core.ServiceContracts;
 using AttendanceManagement.Core.Services;
 using AttendanceManagement.Infrastructure.DatabaseContext;
 using AttendanceManagement.Infrastructure.Repositories;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -31,6 +30,10 @@ builder.Services.AddControllers(options =>
 builder.Services.AddTransient<IJwtService, JwtService>();
 builder.Services.AddTransient<IDepartmentsRepository, DepartmentsRepository>();
 builder.Services.AddTransient<IDepartmentService, DepartmentService>();
+builder.Services.AddTransient<IShiftsRepository, ShiftsRepository>();
+builder.Services.AddTransient<IShiftService,  ShiftService>();
+builder.Services.AddTransient<IAttendancesRepository, AttendancesRepository>();
+builder.Services.AddTransient<IAttendanceService,  AttendanceService>();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
