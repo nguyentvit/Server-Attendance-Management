@@ -185,7 +185,8 @@ namespace AttendanceManagement.WebAPI.Controllers
                 return Ok(new
                 {
                     token = new JwtSecurityTokenHandler().WriteToken(token),
-                    expiration = token.ValidTo
+                    expiration = token.ValidTo,
+                    status = 200
                 });
             }
             else
