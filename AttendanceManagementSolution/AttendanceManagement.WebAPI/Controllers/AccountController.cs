@@ -230,7 +230,7 @@ namespace AttendanceManagement.WebAPI.Controllers
             }
         }
         /// <summary>
-        /// No field
+        /// Log out
         /// </summary>
         /// <returns></returns>
         [HttpGet("logout")]
@@ -320,6 +320,12 @@ namespace AttendanceManagement.WebAPI.Controllers
 
                     await _userManager.AddToRoleAsync(user, UserTypeOptions.User.ToString());
                 }
+                string userId = user.Id.ToString();
+                string userName = user.PersonName.ToString();
+                string combine = userId + "_" + userName;
+                string folderPath = Path.Combine("E:\\Pbl5\\Recognize\\data\\data_faces_from_camera\\", combine);
+                Directory.CreateDirectory(folderPath);
+
                 return Ok(user);
             }
             else

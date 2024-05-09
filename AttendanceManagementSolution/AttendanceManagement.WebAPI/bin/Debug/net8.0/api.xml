@@ -35,7 +35,7 @@
         </member>
         <member name="M:AttendanceManagement.WebAPI.Controllers.AccountController.GetLogout">
             <summary>
-            No field
+            Log out
             </summary>
             <returns></returns>
         </member>
@@ -65,7 +65,7 @@
         </member>
         <member name="M:AttendanceManagement.WebAPI.Controllers.AttendancesController.GetAttendance(System.Guid)">
             <summary>
-            
+            return departmentName, List users, List shift
             </summary>
             <param name="attendanceId"></param>
             <returns></returns>

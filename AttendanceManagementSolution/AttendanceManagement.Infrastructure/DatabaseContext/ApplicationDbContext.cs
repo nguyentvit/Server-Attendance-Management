@@ -46,6 +46,11 @@ namespace AttendanceManagement.Infrastructure.DatabaseContext
                 .WithMany(a => a.Attendances)
                 .HasForeignKey(a => a.UserId)
                 .IsRequired();
+
+            builder.Entity<Shift>()
+                .HasMany(s => s.Users)
+                .WithMany(u => u.Shifts)
+                .UsingEntity("RegisterShift");
         }
     }
 }

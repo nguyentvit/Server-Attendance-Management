@@ -12,6 +12,7 @@ namespace AttendanceManagement.Core.Identity
         public Guid? DeparmentId {  get; set; }
         public Department? Department { get; set; }
         public ICollection<Attendance> Attendances { get; set; } = new List<Attendance>();
+        public List<Shift> Shifts { get; } = [];
 
     }
 }

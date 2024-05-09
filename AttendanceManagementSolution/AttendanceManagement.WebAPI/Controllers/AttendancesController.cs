@@ -1,6 +1,7 @@
 ﻿using AttendanceManagement.Core.Domain.Entities;
 using AttendanceManagement.Core.DTO;
 using AttendanceManagement.Core.ServiceContracts;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Globalization;
@@ -32,7 +33,7 @@ namespace AttendanceManagement.WebAPI.Controllers
             return Ok(attendances);
         }
         /// <summary>
-        /// 
+        /// return departmentName, List users, List shift
         /// </summary>
         /// <param name="attendanceId"></param>
         /// <returns></returns>
@@ -52,6 +53,7 @@ namespace AttendanceManagement.WebAPI.Controllers
         /// <param name="attendanceDTO"></param>
         /// <returns></returns>
         [HttpPost]
+        [AllowAnonymous]
         public async Task<ActionResult<AttendanceResponse>> AddAttendance(AttendanceDTO attendanceDTO)
         {
             Attendance attendance = new Attendance()
