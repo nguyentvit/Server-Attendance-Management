@@ -1,6 +1,6 @@
 ﻿using AttendanceManagement.Core.Domain.Entities;
 using AttendanceManagement.Core.Domain.RepositoryContracts;
-using AttendanceManagement.Core.DTO;
+using AttendanceManagement.Core.DTO.ShiftDTO;
 using AttendanceManagement.Core.ServiceContracts;
 using System;
 
@@ -13,20 +13,13 @@ namespace AttendanceManagement.Core.Services
         {
             _shiftsRepository = shiftsRepository;
         }
-
-        public async Task<ShiftResponse?> AddShift(Shift shift)
-        {
-            await _shiftsRepository.AddShift(shift);
-            return shift.ToShiftResponse();
-        }
-
-        public async Task<List<ShiftResponse>> GetAllShifts()
+        public async Task<List<ShiftResponseDTO>> GetAllShifts()
         {
             List<Shift> shifts = await _shiftsRepository.GetAllShifts();
             return shifts.Select(s => s.ToShiftResponse()).ToList();
         }
 
-        public async Task<ShiftResponse?> GetShift(Guid shiftId)
+        public async Task<ShiftResponseDTO?> GetShift(Guid shiftId)
         {
             Shift? shift = await _shiftsRepository.GetShift(shiftId);
             if (shift == null)
@@ -36,7 +29,7 @@ namespace AttendanceManagement.Core.Services
             return shift.ToShiftResponse();
         }
 
-        public async Task<ShiftResponse?> UpdateShift(Shift shift)
+        public async Task<ShiftResponseDTO?> UpdateShift(Shift shift)
         {
             var shiftUpdate = await _shiftsRepository.UpdateShift(shift);
             if (shiftUpdate == null) 

@@ -39,12 +39,12 @@ namespace AttendanceManagement.Infrastructure.Repositories
 
         public async Task<List<Department>> GetAllDepartments()
         {
-            return await _db.Departments.Include(d => d.Users).Include(d => d.Shifts).ToListAsync();
+            return await _db.Departments.Include(d => d.Users).ToListAsync();
         }
 
         public async Task<Department?> GetDepartment(Guid departmentId)
         {
-            var department = await _db.Departments.Include(d => d.Users).Include(d => d.Shifts).FirstOrDefaultAsync(d => d.DepartmentId == departmentId);
+            var department = await _db.Departments.Include(d => d.Users).FirstOrDefaultAsync(d => d.DepartmentId == departmentId);
             return department;
         }
 

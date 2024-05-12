@@ -1,5 +1,5 @@
 ﻿using AttendanceManagement.Core.Domain.Entities;
-using AttendanceManagement.Core.DTO;
+using AttendanceManagement.Core.DTO.DepartmentDTO;
 using AttendanceManagement.Core.Enums;
 using AttendanceManagement.Core.ServiceContracts;
 using Microsoft.AspNetCore.Authorization;
@@ -12,7 +12,7 @@ namespace AttendanceManagement.WebAPI.Controllers
     /// 
     /// </summary>
     [Authorize(Roles = "Admin")]
-    public class DepartmentsController : CustomControllersBase
+    public class DepartmentsController : CustomControllersAdminBase
     {
         private readonly IDepartmentService _departmentsService;
         /// <summary>
@@ -28,7 +28,7 @@ namespace AttendanceManagement.WebAPI.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<DepartmentResponse>>> GetAllDepartments()
+        public async Task<ActionResult<IEnumerable<DepartmentResponseDTO>>> GetAllDepartments()
         {
             var departments = await _departmentsService.GetAllDepartments();
             return Ok(departments);
@@ -39,7 +39,7 @@ namespace AttendanceManagement.WebAPI.Controllers
         /// <param name="departmentId"></param>
         /// <returns></returns>
         [HttpGet("{departmentId}")]
-        public async Task<ActionResult<DepartmentResponse>> GetDepartment(Guid departmentId)
+        public async Task<ActionResult<DepartmentResponseDTO>> GetDepartment(Guid departmentId)
         {
             var department = await _departmentsService.GetDepartment(departmentId);
             if (department == null)
@@ -54,24 +54,25 @@ namespace AttendanceManagement.WebAPI.Controllers
         /// <param name="department"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<ActionResult<DepartmentResponse>> AddDepartment([Bind(nameof(Department.DepartmentName))] Department department)
+        public async Task<ActionResult<DepartmentResponseDTO>> AddDepartment(DepartmentAddDTO departmentAddDTO)
         {
-            await _departmentsService.AddDepartment(department);
-            return CreatedAtAction("GetDepartment", new {departmentId = department.DepartmentId}, department.ToDepartmentResponse());
+            var departmentAdder = await _departmentsService.AddDepartment(departmentAddDTO);
+            return CreatedAtAction("GetDepartment", new {departmentId = departmentAdder.DepartmentId}, departmentAdder);
         }
         /// <summary>
         /// 
         /// </summary>
         /// <param name="departmentId"></param>
-        /// <param name="department"></param>
+        /// <param name="departmentUpdate"></param>
         /// <returns></returns>
         [HttpPut("{departmentId}")]
-        public async Task<ActionResult<DepartmentResponse>> UpdateDepartment(Guid departmentId, [Bind(nameof(Department.DepartmentId), nameof(Department.DepartmentName))] Department department)
+        public async Task<ActionResult<DepartmentResponseDTO>> UpdateDepartment(Guid departmentId, [Bind(nameof(Department.DepartmentName))] DepartmentUpdateDTO departmentUpdate)
         {
-            if (departmentId != department.DepartmentId)
+            Department department = new Department()
             {
-                return BadRequest();
-            }
+                DepartmentId = departmentId,
+                DepartmentName = departmentUpdate.DepartmentName
+            };
 
             var result = await _departmentsService.UpdateDepartment(department);
 
@@ -87,7 +88,7 @@ namespace AttendanceManagement.WebAPI.Controllers
         /// <param name="departmentId"></param>
         /// <returns></returns>
         [HttpDelete("{departmentId}")]
-        public async Task<ActionResult<DepartmentResponse>> DeleteDeparment(Guid departmentId)
+        public async Task<ActionResult<DepartmentResponseDTO>> DeleteDeparment(Guid departmentId)
         {
             var result = await _departmentsService.DeleteDepartment(departmentId);
             if (result == null)

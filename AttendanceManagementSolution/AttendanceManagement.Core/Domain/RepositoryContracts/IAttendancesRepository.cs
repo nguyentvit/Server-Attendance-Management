@@ -13,5 +13,7 @@ namespace AttendanceManagement.Core.Domain.RepositoryContracts
         Task<Attendance?> GetAttendance(Guid AttendanceId);
         Task<Attendance> AddAttendance(Attendance Attendance);
         Task<List<Attendance>> GetAttendancesByDate(DateTime date);
+        Task<Attendance?> WorkingStatusUser(Guid userId, DateTime date);
+        Task<List<Attendance>> WorkingStatusAllUsers(DateTime date);
     }
 }

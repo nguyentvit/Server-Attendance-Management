@@ -14,19 +14,6 @@ namespace AttendanceManagement.Infrastructure.Repositories
             _db = db;
         }
 
-        public async Task<Shift> AddShift(Shift shift)
-        {
-            _db.Shifts.Add(shift);
-            await _db.SaveChangesAsync();
-
-            var shiftAfterAdder = await GetShift(shift.ShiftId);
-            if (shiftAfterAdder != null)
-            {
-                shift.Department = shiftAfterAdder.Department;
-            }
-            return shift;
-        }
-
         public async Task<Shift?> DeleteShift(Guid shiftId)
         {
             var shift = await _db.Shifts.FindAsync(shiftId);
@@ -41,12 +28,12 @@ namespace AttendanceManagement.Infrastructure.Repositories
 
         public async Task<List<Shift>> GetAllShifts()
         {
-            return await _db.Shifts.Include(d => d.Department).ToListAsync();
+            return await _db.Shifts.ToListAsync();
         }
 
         public async Task<Shift?> GetShift(Guid shiftId)
         {
-            var shift = await _db.Shifts.Include(d => d.Department).FirstOrDefaultAsync(d => d.ShiftId == shiftId);
+            var shift = await _db.Shifts.FirstOrDefaultAsync(d => d.ShiftId == shiftId);
             return shift;
         }
 

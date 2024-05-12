@@ -11,8 +11,8 @@ namespace AttendanceManagement.Core.Identity
         public string Gender { get; set; } = string.Empty;
         public Guid? DeparmentId {  get; set; }
         public Department? Department { get; set; }
-        public ICollection<Attendance> Attendances { get; set; } = new List<Attendance>();
-        public List<Shift> Shifts { get; } = [];
+        public ICollection<Attendance> Attendances { get; } = new List<Attendance>();
+        public ICollection<DayOffUser> DayOffUsers { get; } = new List<DayOffUser>();
 
     }
 }

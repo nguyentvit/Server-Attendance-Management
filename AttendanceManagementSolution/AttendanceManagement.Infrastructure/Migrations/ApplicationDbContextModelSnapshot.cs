@@ -44,6 +44,45 @@ namespace AttendanceManagement.Infrastructure.Migrations
                     b.ToTable("Attendances");
                 });
 
+            modelBuilder.Entity("AttendanceManagement.Core.Domain.Entities.DayOff", b =>
+                {
+                    b.Property<Guid>("DayOffId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("DayOffId");
+
+                    b.ToTable("DayOffs");
+                });
+
+            modelBuilder.Entity("AttendanceManagement.Core.Domain.Entities.DayOffUser", b =>
+                {
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("DayOffId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Reason")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(max)")
+                        .HasDefaultValue("Waiting");
+
+                    b.HasKey("UserId", "DayOffId");
+
+                    b.HasIndex("DayOffId");
+
+                    b.ToTable("DayOffUsers");
+                });
+
             modelBuilder.Entity("AttendanceManagement.Core.Domain.Entities.Department", b =>
                 {
                     b.Property<Guid>("DepartmentId")
@@ -77,9 +116,6 @@ namespace AttendanceManagement.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("DepartmentId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("ShiftName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -92,9 +128,23 @@ namespace AttendanceManagement.Infrastructure.Migrations
 
                     b.HasKey("ShiftId");
 
-                    b.HasIndex("DepartmentId");
-
                     b.ToTable("Shifts");
+
+                    b.HasData(
+                        new
+                        {
+                            ShiftId = new Guid("13a27559-42be-4984-8e5c-55331f5a039f"),
+                            ShiftName = "Morning",
+                            Time_In = new TimeSpan(0, 7, 30, 0, 0),
+                            Time_Out = new TimeSpan(0, 11, 30, 0, 0)
+                        },
+                        new
+                        {
+                            ShiftId = new Guid("3a6ffedc-25d6-45da-8354-b7880eced953"),
+                            ShiftName = "Afternoon",
+                            Time_In = new TimeSpan(0, 14, 0, 0, 0),
+                            Time_Out = new TimeSpan(0, 17, 30, 0, 0)
+                        });
                 });
 
             modelBuilder.Entity("AttendanceManagement.Core.Identity.ApplicationRole", b =>
@@ -311,21 +361,6 @@ namespace AttendanceManagement.Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("RegisterShift", b =>
-                {
-                    b.Property<Guid>("ShiftsShiftId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("UsersId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("ShiftsShiftId", "UsersId");
-
-                    b.HasIndex("UsersId");
-
-                    b.ToTable("RegisterShift");
-                });
-
             modelBuilder.Entity("AttendanceManagement.Core.Domain.Entities.Attendance", b =>
                 {
                     b.HasOne("AttendanceManagement.Core.Identity.ApplicationUser", "User")
@@ -337,15 +372,23 @@ namespace AttendanceManagement.Infrastructure.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("AttendanceManagement.Core.Domain.Entities.Shift", b =>
+            modelBuilder.Entity("AttendanceManagement.Core.Domain.Entities.DayOffUser", b =>
                 {
-                    b.HasOne("AttendanceManagement.Core.Domain.Entities.Department", "Department")
-                        .WithMany("Shifts")
-                        .HasForeignKey("DepartmentId")
+                    b.HasOne("AttendanceManagement.Core.Domain.Entities.DayOff", "DayOff")
+                        .WithMany("DayOffUsers")
+                        .HasForeignKey("DayOffId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Department");
+                    b.HasOne("AttendanceManagement.Core.Identity.ApplicationUser", "User")
+                        .WithMany("DayOffUsers")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("DayOff");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("AttendanceManagement.Core.Identity.ApplicationUser", b =>
@@ -408,31 +451,21 @@ namespace AttendanceManagement.Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("RegisterShift", b =>
+            modelBuilder.Entity("AttendanceManagement.Core.Domain.Entities.DayOff", b =>
                 {
-                    b.HasOne("AttendanceManagement.Core.Domain.Entities.Shift", null)
-                        .WithMany()
-                        .HasForeignKey("ShiftsShiftId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("AttendanceManagement.Core.Identity.ApplicationUser", null)
-                        .WithMany()
-                        .HasForeignKey("UsersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("DayOffUsers");
                 });
 
             modelBuilder.Entity("AttendanceManagement.Core.Domain.Entities.Department", b =>
                 {
-                    b.Navigation("Shifts");
-
                     b.Navigation("Users");
                 });
 
             modelBuilder.Entity("AttendanceManagement.Core.Identity.ApplicationUser", b =>
                 {
                     b.Navigation("Attendances");
+
+                    b.Navigation("DayOffUsers");
                 });
 #pragma warning restore 612, 618
         }

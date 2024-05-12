@@ -1,6 +1,6 @@
 ﻿using AttendanceManagement.Core.Domain.Entities;
 using AttendanceManagement.Core.Domain.RepositoryContracts;
-using AttendanceManagement.Core.DTO;
+using AttendanceManagement.Core.DTO.DepartmentDTO;
 using AttendanceManagement.Core.ServiceContracts;
 using System;
 
@@ -14,14 +14,14 @@ namespace AttendanceManagement.Core.Services
             _departmentsRepository = departmentsRepository;
         }
 
-        public async Task<List<DepartmentResponse>> GetAllDepartments()
+        public async Task<List<DepartmentResponseDTO>> GetAllDepartments()
         {
             List<Department> departments = await _departmentsRepository.GetAllDepartments();
 
             return departments.Select(department => department.ToDepartmentResponse()).ToList();
         }
 
-        public async Task<DepartmentResponse?> GetDepartment(Guid Id)
+        public async Task<DepartmentResponseDTO?> GetDepartment(Guid Id)
         {
             Department? department = await _departmentsRepository.GetDepartment(Id);
             if (department == null)
@@ -31,15 +31,19 @@ namespace AttendanceManagement.Core.Services
             return department.ToDepartmentResponse();
         }
 
-        public async Task<DepartmentResponse> AddDepartment(Department department)
+        public async Task<DepartmentResponseDTO> AddDepartment(DepartmentAddDTO departmentAddDTO)
         {
-            await _departmentsRepository.AddDepartment(department);
+            Department department = new Department()
+            {
+                DepartmentName = departmentAddDTO.DepartmentName
+            };
+            department = await _departmentsRepository.AddDepartment(department);
             return department.ToDepartmentResponse();
         }
 
-        public async Task<DepartmentResponse?> UpdateDepartment(Department Department)
+        public async Task<DepartmentResponseDTO?> UpdateDepartment(Department department)
         {
-            var result = await _departmentsRepository.UpdateDepartment(Department);
+            var result = await _departmentsRepository.UpdateDepartment(department);
             if (result == null) 
             {
                 return null;
@@ -47,7 +51,7 @@ namespace AttendanceManagement.Core.Services
             return result.ToDepartmentResponse();
         }
 
-        public async Task<DepartmentResponse?> DeleteDepartment(Guid Id)
+        public async Task<DepartmentResponseDTO?> DeleteDepartment(Guid Id)
         {
             var result = await _departmentsRepository.DeleteDepartment(Id);
             if (result == null)

@@ -8,6 +8,6 @@ namespace AttendanceManagement.Core.Enums
 {
     public enum ShiftOptions
     {
-        Morning, Afternoon, Night
+        Morning, Afternoon
     }
 }

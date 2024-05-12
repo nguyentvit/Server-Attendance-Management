@@ -1,5 +1,6 @@
 ﻿using AttendanceManagement.Core.Domain.Entities;
 using AttendanceManagement.Core.DTO;
+using AttendanceManagement.Core.DTO.CustomDTO;
 using AttendanceManagement.Core.Enums;
 using AttendanceManagement.Core.Identity;
 using AttendanceManagement.Core.ServiceContracts;
@@ -16,12 +17,12 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace AttendanceManagement.WebAPI.Controllers
-{   
+{
     /// <summary>
     /// 
     /// </summary>
     [Authorize(Roles = "Admin")]
-    public class AccountController : CustomControllersBase
+    public class AccountController : CustomControllersAdminBase
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
@@ -173,7 +174,8 @@ namespace AttendanceManagement.WebAPI.Controllers
                 var authClaims = new List<Claim> 
                 { 
                     new Claim(ClaimTypes.Name, user.UserName),
-                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                    new Claim(ClaimTypes.NameIdentifier, user.Id.ToString())
                 };
 
                 foreach(var userRole in userRoles)
