@@ -19,14 +19,14 @@
             <param name="jwtService"></param>
             <param name="departmentService"></param>
         </member>
-        <member name="M:AttendanceManagement.WebAPI.Controllers.AccountController.PostRegister(AttendanceManagement.Core.DTO.RegisterDTO)">
+        <member name="M:AttendanceManagement.WebAPI.Controllers.AccountController.PostRegister(AttendanceManagement.Core.DTO.CustomDTO.RegisterDTO)">
             <summary>
             Register account by fields (PersonName), (Email), (Gender: Male, Female, Other), (Address), (PhoneNumber), (Password), (ConfirmPassword)
             </summary>
             <param name="registerDTO"></param>
             <returns></returns>
         </member>
-        <member name="M:AttendanceManagement.WebAPI.Controllers.AccountController.PostLogin(AttendanceManagement.Core.DTO.LoginDTO)">
+        <member name="M:AttendanceManagement.WebAPI.Controllers.AccountController.PostLogin(AttendanceManagement.Core.DTO.CustomDTO.LoginDTO)">
             <summary>
             Login by fields (Email), (Password)
             </summary>
@@ -35,11 +35,11 @@
         </member>
         <member name="M:AttendanceManagement.WebAPI.Controllers.AccountController.GetLogout">
             <summary>
-            No field
+            Log out
             </summary>
             <returns></returns>
         </member>
-        <member name="M:AttendanceManagement.WebAPI.Controllers.AccountController.PostRegisterUser(AttendanceManagement.Core.DTO.RegisterDTO)">
+        <member name="M:AttendanceManagement.WebAPI.Controllers.AccountController.PostRegisterUser(AttendanceManagement.Core.DTO.CustomDTO.RegisterDTO)">
             <summary>
             
             </summary>
@@ -51,7 +51,7 @@
             
             </summary>
         </member>
-        <member name="M:AttendanceManagement.WebAPI.Controllers.AttendancesController.#ctor(AttendanceManagement.Core.ServiceContracts.IAttendanceService)">
+        <member name="M:AttendanceManagement.WebAPI.Controllers.AttendancesController.#ctor(AttendanceManagement.Core.ServiceContracts.IAttendanceService,Microsoft.AspNetCore.SignalR.IHubContext{AttendanceManagement.WebAPI.Hubs.AttendanceHub})">
             <summary>
             
             </summary>
@@ -65,19 +65,26 @@
         </member>
         <member name="M:AttendanceManagement.WebAPI.Controllers.AttendancesController.GetAttendance(System.Guid)">
             <summary>
-            
+            return departmentName, List users, List shift
             </summary>
             <param name="attendanceId"></param>
             <returns></returns>
         </member>
-        <member name="M:AttendanceManagement.WebAPI.Controllers.AttendancesController.AddAttendance(AttendanceManagement.Core.DTO.AttendanceDTO)">
+        <member name="M:AttendanceManagement.WebAPI.Controllers.AttendancesController.AddAttendance(AttendanceManagement.Core.DTO.AttendanceDTO.AttendanceAddDTO)">
             <summary>
             
             </summary>
-            <param name="attendanceDTO"></param>
+            <param name="attendanceAddDTO"></param>
             <returns></returns>
         </member>
         <member name="M:AttendanceManagement.WebAPI.Controllers.AttendancesController.GetHeHe(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="date"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AttendanceManagement.WebAPI.Controllers.DayOffAdminController.GetDayOffsByDate(System.String)">
             <summary>
             
             </summary>
@@ -108,19 +115,19 @@
             <param name="departmentId"></param>
             <returns></returns>
         </member>
-        <member name="M:AttendanceManagement.WebAPI.Controllers.DepartmentsController.AddDepartment(AttendanceManagement.Core.Domain.Entities.Department)">
+        <member name="M:AttendanceManagement.WebAPI.Controllers.DepartmentsController.AddDepartment(AttendanceManagement.Core.DTO.DepartmentDTO.DepartmentAddDTO)">
             <summary>
             
             </summary>
             <param name="department"></param>
             <returns></returns>
         </member>
-        <member name="M:AttendanceManagement.WebAPI.Controllers.DepartmentsController.UpdateDepartment(System.Guid,AttendanceManagement.Core.Domain.Entities.Department)">
+        <member name="M:AttendanceManagement.WebAPI.Controllers.DepartmentsController.UpdateDepartment(System.Guid,AttendanceManagement.Core.DTO.DepartmentDTO.DepartmentUpdateDTO)">
             <summary>
             
             </summary>
             <param name="departmentId"></param>
-            <param name="department"></param>
+            <param name="departmentUpdate"></param>
             <returns></returns>
         </member>
         <member name="M:AttendanceManagement.WebAPI.Controllers.DepartmentsController.DeleteDeparment(System.Guid)">
@@ -135,7 +142,7 @@
             
             </summary>
         </member>
-        <member name="M:AttendanceManagement.WebAPI.Controllers.ShiftsController.#ctor(AttendanceManagement.Core.ServiceContracts.IShiftService,AttendanceManagement.Core.ServiceContracts.IDepartmentService)">
+        <member name="M:AttendanceManagement.WebAPI.Controllers.ShiftsController.#ctor(AttendanceManagement.Core.ServiceContracts.IShiftService)">
             <summary>
             
             </summary>
@@ -154,14 +161,7 @@
             <param name="shiftId"></param>
             <returns></returns>
         </member>
-        <member name="M:AttendanceManagement.WebAPI.Controllers.ShiftsController.AddShift(AttendanceManagement.Core.DTO.ShiftDTO)">
-            <summary>
-            
-            </summary>
-            <param name="shiftDTO"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AttendanceManagement.WebAPI.Controllers.ShiftsController.PutShift(System.Guid,AttendanceManagement.Core.DTO.ShiftUpdateDTO)">
+        <member name="M:AttendanceManagement.WebAPI.Controllers.ShiftsController.PutShift(System.Guid,AttendanceManagement.Core.DTO.ShiftDTO.ShiftUpdateDTO)">
             <summary>
             
             </summary>
@@ -185,14 +185,6 @@
             
             </summary>
             <param name="userId"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AttendanceManagement.WebAPI.Controllers.UsersController.GetAttendanceOfUserByDate(System.Guid,System.String)">
-            <summary>
-            
-            </summary>
-            <param name="userId"></param>
-            <param name="date"></param>
             <returns></returns>
         </member>
     </members>

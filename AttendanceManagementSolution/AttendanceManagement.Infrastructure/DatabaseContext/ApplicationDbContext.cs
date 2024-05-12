@@ -1,4 +1,5 @@
 ﻿using AttendanceManagement.Core.Domain.Entities;
+using AttendanceManagement.Core.Enums;
 using AttendanceManagement.Core.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -13,6 +14,8 @@ namespace AttendanceManagement.Infrastructure.DatabaseContext
         public virtual DbSet<Department> Departments { get; set; }
         public virtual DbSet<Shift> Shifts { get; set; }
         public virtual DbSet<Attendance> Attendances { get; set; }
+        public virtual DbSet<DayOff> DayOffs { get; set; }
+        public virtual DbSet<DayOffUser> DayOffUsers { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -29,23 +32,50 @@ namespace AttendanceManagement.Infrastructure.DatabaseContext
                 DepartmentName = "Accounting"
             });
 
+            builder.Entity<Shift>().HasData(new Shift()
+            {
+                ShiftId = Guid.Parse("13A27559-42BE-4984-8E5C-55331F5A039F"),
+                ShiftName = ShiftOptions.Morning.ToString(),
+                Time_In = new TimeSpan(7, 30, 0),
+                Time_Out = new TimeSpan(11, 30, 0)
+            });
+
+            builder.Entity<Shift>().HasData(new Shift()
+            {
+                ShiftId = Guid.Parse("3A6FFEDC-25D6-45DA-8354-B7880ECED953"),
+                ShiftName = ShiftOptions.Afternoon.ToString(),
+                Time_In = new TimeSpan(14, 0, 0),
+                Time_Out = new TimeSpan(17, 30, 0)
+            });
+
             builder.Entity<Department>()
                 .HasMany(d => d.Users)
                 .WithOne(d => d.Department)
                 .HasForeignKey(u => u.DeparmentId)
                 .IsRequired(false);
 
-            builder.Entity<Department>()
-                .HasMany(d => d.Shifts)
-                .WithOne(e => e.Department)
-                .HasForeignKey(e => e.DepartmentId)
-                .IsRequired();
-
             builder.Entity<Attendance>()
                 .HasOne(a => a.User)
                 .WithMany(a => a.Attendances)
                 .HasForeignKey(a => a.UserId)
                 .IsRequired();
+
+            builder.Entity<DayOffUser>().HasKey(d => new { d.UserId, d.DayOffId });
+
+            builder.Entity<DayOffUser>()
+                .HasOne<DayOff>(d => d.DayOff)
+                .WithMany(s => s.DayOffUsers)
+                .HasForeignKey(d => d.DayOffId);
+
+            builder.Entity<DayOffUser>()
+                .HasOne<ApplicationUser>(d => d.User)
+                .WithMany(u => u.DayOffUsers)
+                .HasForeignKey(u => u.UserId);
+
+            builder.Entity<DayOffUser>()
+                .Property(d => d.Status)
+                .HasDefaultValue(DayOffOptions.Waiting.ToString());
+            
         }
     }
 }

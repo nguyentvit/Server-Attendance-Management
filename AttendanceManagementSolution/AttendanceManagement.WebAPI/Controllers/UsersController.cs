@@ -1,4 +1,4 @@
-﻿using AttendanceManagement.Core.DTO;
+﻿using AttendanceManagement.Core.DTO.UserDTO;
 using AttendanceManagement.Core.Enums;
 using AttendanceManagement.Core.Identity;
 using AttendanceManagement.Core.ServiceContracts;
@@ -13,14 +13,12 @@ namespace AttendanceManagement.WebAPI.Controllers
     /// <summary>
     /// 
     /// </summary>
-    public class UsersController : CustomControllersBase
+    public class UsersController : CustomControllersAdminBase
     {
         private readonly UserManager<ApplicationUser> _userManager;
-        private readonly IAttendanceService _attendanceService;
-        public UsersController(UserManager<ApplicationUser> userManager, IAttendanceService attendanceService)
+        public UsersController(UserManager<ApplicationUser> userManager)
         {
             _userManager = userManager;
-            _attendanceService = attendanceService;
         }
         /// <summary>
         /// 
@@ -57,6 +55,8 @@ namespace AttendanceManagement.WebAPI.Controllers
         [HttpGet("{userId}")]
         public async Task<ActionResult<UserResponseWithAttendance>> GetUser(Guid userId)
         {
+            //System.Security.Claims.ClaimsPrincipal currentUser = this.User;
+            
             var usersInRoleUser = await _userManager.GetUsersInRoleAsync(UserTypeOptions.User.ToString());
 
             var usersWithDepartment = await _userManager.Users.Include(u => u.Department).Include(u => u.Attendances).ToListAsync();
@@ -96,27 +96,27 @@ namespace AttendanceManagement.WebAPI.Controllers
         /// <param name="userId"></param>
         /// <param name="date"></param>
         /// <returns></returns>
-        [HttpGet("{userId}/{date}")]
-        public async Task<IActionResult> GetAttendanceOfUserByDate(Guid userId, string date)
-        {
-            var usersInRoleUser = await _userManager.GetUsersInRoleAsync(UserTypeOptions.User.ToString());
+        //[HttpGet("{userId}/{date}")]
+        //public async Task<IActionResult> GetAttendanceOfUserByDate(Guid userId, string date)
+        //{
+        //    var usersInRoleUser = await _userManager.GetUsersInRoleAsync(UserTypeOptions.User.ToString());
 
-            if (usersInRoleUser == null)
-            {
-                return NotFound();
-            }
+        //    if (usersInRoleUser == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            DateTime dateTime;
-            if (!DateTime.TryParseExact(date, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out dateTime))
-            {
-                return BadRequest();
-            }
+        //    DateTime dateTime;
+        //    if (!DateTime.TryParseExact(date, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out dateTime))
+        //    {
+        //        return BadRequest();
+        //    }
 
-            var attendances = await _attendanceService.GetAttendancesByDate(dateTime);
+        //    var attendances = await _attendanceService.GetAttendancesByDate(dateTime);
 
-            var attendancesOfUser = attendances.Where(a => a.UserId == userId).ToList();
+        //    var attendancesOfUser = attendances.Where(a => a.UserId == userId).ToList();
 
-            return Ok(attendancesOfUser);
-        }
+        //    return Ok(attendancesOfUser);
+        //}
     }
 }

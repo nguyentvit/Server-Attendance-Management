@@ -4,6 +4,7 @@ using AttendanceManagement.Core.ServiceContracts;
 using AttendanceManagement.Core.Services;
 using AttendanceManagement.Infrastructure.DatabaseContext;
 using AttendanceManagement.Infrastructure.Repositories;
+using AttendanceManagement.WebAPI.Hubs;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -34,6 +35,12 @@ builder.Services.AddTransient<IShiftsRepository, ShiftsRepository>();
 builder.Services.AddTransient<IShiftService,  ShiftService>();
 builder.Services.AddTransient<IAttendancesRepository, AttendancesRepository>();
 builder.Services.AddTransient<IAttendanceService,  AttendanceService>();
+builder.Services.AddTransient<IDayOffsRepository, DayOffsRepository>();
+builder.Services.AddTransient<IDayOffService, DayOffService>();
+builder.Services.AddTransient<IDayOffUsersRepository, DayOffUsersRepository>();
+builder.Services.AddTransient<IWorkingStatusService, WorkingStatusService>();
+
+builder.Services.AddSignalR();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
@@ -53,9 +60,12 @@ builder.Services.AddCors(options =>
     options.AddDefaultPolicy(policyBuilder =>
     {
         policyBuilder
-            .WithOrigins(builder.Configuration.GetSection("AllowedOrigins").Get<string[]>())
+            //.WithOrigins(builder.Configuration.GetSection("AllowedOrigins").Get<string[]>())
+            .WithOrigins("http://127.0.0.1:5501")
             .WithHeaders("Authorization", "origin", "accept", "content-type")
-            .WithMethods("GET", "POST", "PUT", "DELETE");
+            .WithMethods("GET", "POST", "PUT", "DELETE")
+            .AllowCredentials()
+            .WithHeaders("X-Requested-With", "x-signalr-user-agent");
     });
 });
 
@@ -113,5 +123,6 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+app.MapHub<AttendanceHub>("/Attendance");
 
 app.Run();

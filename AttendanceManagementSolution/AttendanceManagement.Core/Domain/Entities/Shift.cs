@@ -1,4 +1,5 @@
 ﻿using AttendanceManagement.Core.Enums;
+using AttendanceManagement.Core.Identity;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -18,8 +19,6 @@ namespace AttendanceManagement.Core.Domain.Entities
         public TimeSpan Time_In { get; set; }
         [Required(ErrorMessage = "Time out can't be blank")]
         public TimeSpan Time_Out { get; set;}
-        public Guid DepartmentId {  get; set; }
-        public Department Department { get; set; } = null!;
 
     }
 }

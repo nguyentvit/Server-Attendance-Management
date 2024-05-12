@@ -11,8 +11,6 @@ namespace AttendanceManagement.Core.Domain.RepositoryContracts
     {
         Task<List<Shift>> GetAllShifts();
         Task<Shift?> GetShift(Guid shiftId);
-        Task<Shift> AddShift(Shift shift);
         Task<Shift?> UpdateShift(Shift shift);
-        Task<Shift?> DeleteShift(Guid shiftId);
     }
 }
