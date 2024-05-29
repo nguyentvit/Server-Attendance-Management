@@ -21,6 +21,7 @@ namespace AttendanceManagement.Core.Services
                 Status = attendanceAddDTO.Status,
                 UserId = attendanceAddDTO.UserId,
                 Time = DateTime.UtcNow.ToLocalTime(),
+                PathImg = attendanceAddDTO.PathImg
             };
             var attendanceAdder = await _attendancesRepository.AddAttendance(attendance);
             return attendanceAdder.ToAttendanceResponse();
@@ -46,6 +47,24 @@ namespace AttendanceManagement.Core.Services
         {
             var attendances = await _attendancesRepository.GetAttendancesByDate(date);
             return attendances.Select(a => a.ToAttendanceResponse()).ToList();
+        }
+
+        public async Task<List<AttendanceResponseDTO>> GetAttendancesByUserId(Guid userId)
+        {
+            var attendances = await _attendancesRepository.GetAttendancesByUserId(userId);
+            return attendances.Select(a => a.ToAttendanceResponse()).ToList();
+        }
+
+        public async Task<List<AttendanceResponseDTO>> GetAttendancesByUserIdAndDate(Guid userId, DateTime date)
+        {
+            var attendances = await _attendancesRepository.GetAttendancesByUserIdAndDate(userId, date);
+            return attendances.Select(a => a.ToAttendanceResponse()).ToList();
+        }
+
+        public async Task<AttendanceResponseDTO> GetLastAttendance()
+        {
+            var attendance = await _attendancesRepository.GetLastAttendance();
+            return attendance.ToAttendanceResponse();
         }
     }
 }

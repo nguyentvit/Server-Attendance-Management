@@ -6,7 +6,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace AttendanceManagement.Infrastructure.Repositories
 {
@@ -47,6 +49,23 @@ namespace AttendanceManagement.Infrastructure.Repositories
             return attendance;
         }
 
+        public async Task<Attendance> GetLastAttendance()
+        {
+            var attendance = await _db.Attendances.Include(a => a.User).OrderBy(d => d.Time).LastOrDefaultAsync();
+
+            var personName = attendance.User.PersonName;
+            var normalName = RemoveVietnameseDiacritics(personName);
+            attendance.User.PersonName = normalName;
+            return attendance;
+        }
+        private string RemoveVietnameseDiacritics(string input)
+        {
+            string normalizedString = input.Normalize(NormalizationForm.FormD);
+            Regex regex = new Regex(@"\p{IsCombiningDiacriticalMarks}+");
+            return regex.Replace(normalizedString, System.String.Empty)
+                        .Replace('\u0111', 'd')
+                        .Replace('\u0110', 'D');
+        }
         public async Task<List<Attendance>> WorkingStatusAllUsers(DateTime date)
         {
             var roleUserId = await _db.Roles.Where(r => r.Name == "User").Select(r => r.Id).FirstOrDefaultAsync();
@@ -55,7 +74,16 @@ namespace AttendanceManagement.Infrastructure.Repositories
             List<Attendance> attendances = new List<Attendance>();
             foreach (var userId in  userIds)
             {
+                
                 var attendance = await _db.Attendances.Include(a => a.User).Where(d => d.UserId == userId && d.Time < date).OrderBy(d => d.Time).LastOrDefaultAsync();
+                var lastTwoAttendances = await _db.Attendances
+                    .Include(a => a.User)
+                    .Where(d => d.UserId == userId && d.Time < date)
+                    .OrderByDescending(d => d.Time)
+                    .Take(2)
+                    .OrderBy(d => d.Time)
+                    .ToListAsync();
+                
                 if (attendance == null)
                 {
                     attendance = new Attendance()
@@ -69,9 +97,26 @@ namespace AttendanceManagement.Infrastructure.Repositories
                 }
                 else
                 {
-                    attendances.Add(attendance);
+                    foreach (Attendance a in lastTwoAttendances)
+                    {
+                        attendances.Add(a);
+                    }
                 }
-                
+                //if (attendance == null)
+                //{
+                //    attendance = new Attendance()
+                //    {
+                //        AttendanceId = Guid.Empty,
+                //        UserId = userId,
+                //        Time = DateTime.MinValue,
+                //        Status = false
+                //    };
+                //    attendances.Add(attendance);
+                //}
+                //else
+                //{
+                //    attendances.Add(attendance);
+                //}
             }
             return attendances;
         }
@@ -81,6 +126,18 @@ namespace AttendanceManagement.Infrastructure.Repositories
             var attendance = await _db.Attendances.Include(a => a.User).Where(d => d.UserId == userId && d.Time < date).OrderBy(d => d.Time).LastOrDefaultAsync();
             return attendance;
 
+        }
+
+        public async Task<List<Attendance>> GetAttendancesByUserId(Guid userId)
+        {
+            var attendance = await _db.Attendances.Include(a => a.User).Where(d => d.UserId == userId).OrderBy(d => d.Time).ToListAsync();
+            return attendance;
+        }
+
+        public async Task<List<Attendance>> GetAttendancesByUserIdAndDate(Guid userId, DateTime date)
+        {
+            var attendance = await _db.Attendances.Include(a => a.User).Where(d => d.UserId == userId && d.Time.Year == date.Year && d.Time.Month == date.Month).OrderBy(d => d.Time).ToListAsync();
+            return attendance;
         }
     }
 }

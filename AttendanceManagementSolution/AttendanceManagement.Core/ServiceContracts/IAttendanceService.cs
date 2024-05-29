@@ -8,7 +8,10 @@ namespace AttendanceManagement.Core.ServiceContracts
     {
         Task<List<AttendanceResponseDTO>> GetAllAttendances();
         Task<List<AttendanceResponseDTO>> GetAttendancesByDate(DateTime date);
+        Task<List<AttendanceResponseDTO>> GetAttendancesByUserId(Guid userId);
+        Task<List<AttendanceResponseDTO>> GetAttendancesByUserIdAndDate(Guid userId, DateTime date);
         Task<AttendanceResponseDTO?> GetAttendance(Guid attendanceId);
         Task<AttendanceResponseDTO> AddAttendance(AttendanceAddDTO attendanceAddDTO);
+        Task<AttendanceResponseDTO> GetLastAttendance();
     }
 }

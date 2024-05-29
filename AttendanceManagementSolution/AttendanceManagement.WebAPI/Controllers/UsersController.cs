@@ -1,62 +1,28 @@
 ﻿using AttendanceManagement.Core.DTO.UserDTO;
 using AttendanceManagement.Core.Enums;
 using AttendanceManagement.Core.Identity;
-using AttendanceManagement.Core.ServiceContracts;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Globalization;
+using System.Security.Claims;
 
 namespace AttendanceManagement.WebAPI.Controllers
 {
-    /// <summary>
-    /// 
-    /// </summary>
-    public class UsersController : CustomControllersAdminBase
+    [Authorize(Roles = "User")]
+    public class UsersController : CustomControllersUserBase
     {
         private readonly UserManager<ApplicationUser> _userManager;
-        public UsersController(UserManager<ApplicationUser> userManager)
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        public UsersController(UserManager<ApplicationUser> userManager, IHttpContextAccessor httpContextAccessor)
         {
             _userManager = userManager;
+            _httpContextAccessor = httpContextAccessor;
         }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<UserReponse>>> GetAllUsers()
+        public async Task<ActionResult<UserResponseWithAttendance>> GetUser()
         {
-            var usersInRoleUser = await _userManager.GetUsersInRoleAsync(UserTypeOptions.User.ToString());
-            
-            var usersWithDepartment = await _userManager.Users.Include(u => u.Department).ToListAsync();
-
-            var users = usersWithDepartment.Where(u => usersInRoleUser.Any(u2 => u2.Id == u.Id));
-
-            var userResponse = users.Select(u => new UserReponse()
-            {
-                Id = u.Id,
-                PersonName = u.PersonName,
-                Email = u.Email,
-                Gender = u.Gender,
-                Address = u.Address,
-                PhoneNumber = u.PhoneNumber,
-                DepartmentId = (Guid)u.DeparmentId,
-                DepartmentName = u.Department.DepartmentName
-            });
-
-            return Ok(userResponse);
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="userId"></param>
-        /// <returns></returns>
-        [HttpGet("{userId}")]
-        public async Task<ActionResult<UserResponseWithAttendance>> GetUser(Guid userId)
-        {
-            //System.Security.Claims.ClaimsPrincipal currentUser = this.User;
-            
+            var userId = Guid.Parse(_httpContextAccessor.HttpContext?.User.FindFirstValue(ClaimTypes.NameIdentifier));
             var usersInRoleUser = await _userManager.GetUsersInRoleAsync(UserTypeOptions.User.ToString());
 
             var usersWithDepartment = await _userManager.Users.Include(u => u.Department).Include(u => u.Attendances).ToListAsync();
@@ -67,7 +33,7 @@ namespace AttendanceManagement.WebAPI.Controllers
             {
                 return NotFound();
             }
-            
+
             var userResponse = new UserResponseWithAttendance()
             {
                 Id = user.Id,
@@ -90,33 +56,5 @@ namespace AttendanceManagement.WebAPI.Controllers
             userResponse.Attendances = attendances;
             return Ok(userResponse);
         }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="userId"></param>
-        /// <param name="date"></param>
-        /// <returns></returns>
-        //[HttpGet("{userId}/{date}")]
-        //public async Task<IActionResult> GetAttendanceOfUserByDate(Guid userId, string date)
-        //{
-        //    var usersInRoleUser = await _userManager.GetUsersInRoleAsync(UserTypeOptions.User.ToString());
-
-        //    if (usersInRoleUser == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    DateTime dateTime;
-        //    if (!DateTime.TryParseExact(date, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out dateTime))
-        //    {
-        //        return BadRequest();
-        //    }
-
-        //    var attendances = await _attendanceService.GetAttendancesByDate(dateTime);
-
-        //    var attendancesOfUser = attendances.Where(a => a.UserId == userId).ToList();
-
-        //    return Ok(attendancesOfUser);
-        //}
     }
 }

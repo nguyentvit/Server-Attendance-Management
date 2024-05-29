@@ -41,6 +41,11 @@ namespace AttendanceManagement.Core.Services
             return await _dayOffUsersRepository.GetAllDayOffAdminByDate(date);
         }
 
+        public async Task<List<DayOffUser>> GetAllDayOffByUserId(Guid userId)
+        {
+            return await _dayOffUsersRepository.GetAllDayOffAdminByUserId(userId);
+        }
+
         public async Task<List<DayOffUser>> GetAllDayOffUser()
         {
             var userId = Guid.Parse(_httpContextAccessor.HttpContext?.User.FindFirstValue(ClaimTypes.NameIdentifier));

@@ -31,6 +31,7 @@ namespace AttendanceManagement.Core.DTO.CustomDTO
         [Required(ErrorMessage = "Confirm Password can't be blank")]
         [Compare("Password", ErrorMessage = "Password and confirm password do not match")]
         public string ConfirmPassword { get; set; } = string.Empty;
+        public string DateStart { get; set; } = string.Empty;
 
         public UserTypeOptions UserType { get; set; } = UserTypeOptions.Admin;
         public Guid DepartmentId { get; set; } = Guid.Empty;

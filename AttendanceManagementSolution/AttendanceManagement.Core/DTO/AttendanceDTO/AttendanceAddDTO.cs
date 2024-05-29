@@ -13,5 +13,7 @@ namespace AttendanceManagement.Core.DTO.AttendanceDTO
         public bool Status { get; set; }
         [Required(ErrorMessage = "UserId can't be blank")]
         public Guid UserId { get; set; }
+        [Required(ErrorMessage = "PathImg can't be blank")]
+        public int PathImg { get; set; }
     }
 }

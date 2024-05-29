@@ -28,6 +28,9 @@ namespace AttendanceManagement.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<int>("PathImg")
+                        .HasColumnType("int");
+
                     b.Property<bool>("Status")
                         .HasColumnType("bit");
 
@@ -108,6 +111,51 @@ namespace AttendanceManagement.Infrastructure.Migrations
                             DepartmentId = new Guid("ef90fd8f-aaea-444e-b3a0-78b56d6c51f8"),
                             DepartmentName = "Accounting"
                         });
+                });
+
+            modelBuilder.Entity("AttendanceManagement.Core.Domain.Entities.Salary", b =>
+                {
+                    b.Property<Guid>("SalaryId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<double>("SalaryPerHour")
+                        .HasColumnType("float");
+
+                    b.HasKey("SalaryId");
+
+                    b.ToTable("Salaries");
+
+                    b.HasData(
+                        new
+                        {
+                            SalaryId = new Guid("735cdc2a-c28d-436c-a544-4247bfcdf27f"),
+                            SalaryPerHour = 20000.0
+                        });
+                });
+
+            modelBuilder.Entity("AttendanceManagement.Core.Domain.Entities.SalaryPay", b =>
+                {
+                    b.Property<DateTime>("Month")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<double>("MoneyPay")
+                        .HasColumnType("float");
+
+                    b.Property<double>("MoneyReceive")
+                        .HasColumnType("float");
+
+                    b.Property<double>("SumaryHour")
+                        .HasColumnType("float");
+
+                    b.HasKey("Month", "UserId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("SalaryPays");
                 });
 
             modelBuilder.Entity("AttendanceManagement.Core.Domain.Entities.Shift", b =>
@@ -191,6 +239,9 @@ namespace AttendanceManagement.Infrastructure.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("DateStart")
+                        .HasColumnType("datetime2");
 
                     b.Property<Guid?>("DeparmentId")
                         .HasColumnType("uniqueidentifier");
@@ -391,6 +442,17 @@ namespace AttendanceManagement.Infrastructure.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("AttendanceManagement.Core.Domain.Entities.SalaryPay", b =>
+                {
+                    b.HasOne("AttendanceManagement.Core.Identity.ApplicationUser", "User")
+                        .WithMany("SalaryPays")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("AttendanceManagement.Core.Identity.ApplicationUser", b =>
                 {
                     b.HasOne("AttendanceManagement.Core.Domain.Entities.Department", "Department")
@@ -466,6 +528,8 @@ namespace AttendanceManagement.Infrastructure.Migrations
                     b.Navigation("Attendances");
 
                     b.Navigation("DayOffUsers");
+
+                    b.Navigation("SalaryPays");
                 });
 #pragma warning restore 612, 618
         }

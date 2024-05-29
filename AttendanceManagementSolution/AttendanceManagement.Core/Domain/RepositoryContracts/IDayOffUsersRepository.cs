@@ -16,5 +16,6 @@ namespace AttendanceManagement.Core.Domain.RepositoryContracts
         Task<DayOffUser?> GetDayOffUserByUserIdAndDate(Guid userId, DateTime date);
         Task<List<DayOffUser>> GetAllDayOffAdminByDate(DateTime date);
         Task<DayOffUser?> UpdateDayOff(DayOffUpdateDTO dayOffUpdateDTO);
+        Task<List<DayOffUser>> GetAllDayOffAdminByUserId(Guid userId);
     }
 }
