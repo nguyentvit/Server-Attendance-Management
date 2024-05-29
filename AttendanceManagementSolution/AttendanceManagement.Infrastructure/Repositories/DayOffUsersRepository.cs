@@ -38,6 +38,11 @@ namespace AttendanceManagement.Infrastructure.Repositories
             return await _db.DayOffUsers.Include(u => u.User).Include(d => d.DayOff).Include(u => u.User.Department).Where(d => d.DayOff.Date == date).ToListAsync();
         }
 
+        public async Task<List<DayOffUser>> GetAllDayOffAdminByUserId(Guid userId)
+        {
+            return await _db.DayOffUsers.Include(u => u.User).Include(d => d.DayOff).Include(u => u.User.Department).Where(d => d.UserId ==  userId).ToListAsync();
+        }
+
         public async Task<List<DayOffUser>> GetAllDayOffUser()
         {
             return await _db.DayOffUsers.Include(u => u.User).Include(d => d.DayOff).Include(u => u.User.Department).ToListAsync();

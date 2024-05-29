@@ -26,7 +26,7 @@ namespace AttendanceManagement.WebAPI.Controllers
         /// </summary>
         /// <param name="date"></param>
         /// <returns></returns>
-        [HttpGet("{date}")]
+        [HttpGet("date/{date}")]
         public async Task<ActionResult<IEnumerable<DayOffResponseAdminDTO>>> GetDayOffsByDate(string date)
         {
             DateTime dateValue;
@@ -36,6 +36,12 @@ namespace AttendanceManagement.WebAPI.Controllers
                 return BadRequest(new { error = "Invalid date format. Date must be in 'yyyy-MM-dd' format." });
             }
             var dayOffs = await _dayOffService.GetAllDayOffByDate(dateValue);
+            return Ok(dayOffs.Select(d => d.ToDayOffResponseAdminDTO()).ToList());
+        }
+        [HttpGet("user/{userId}")]
+        public async Task<ActionResult<IEnumerable<DayOffResponseAdminDTO>>> GetDayOffsByUser(Guid userId)
+        {
+            var dayOffs = await _dayOffService.GetAllDayOffByUserId(userId);
             return Ok(dayOffs.Select(d => d.ToDayOffResponseAdminDTO()).ToList());
         }
         [HttpGet("{date}/{userId}")]

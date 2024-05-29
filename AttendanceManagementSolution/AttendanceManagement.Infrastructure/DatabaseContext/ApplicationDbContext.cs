@@ -16,6 +16,8 @@ namespace AttendanceManagement.Infrastructure.DatabaseContext
         public virtual DbSet<Attendance> Attendances { get; set; }
         public virtual DbSet<DayOff> DayOffs { get; set; }
         public virtual DbSet<DayOffUser> DayOffUsers { get; set; }
+        public virtual DbSet<Salary> Salaries { get; set; }
+        public virtual DbSet<SalaryPay> SalaryPays { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -48,6 +50,13 @@ namespace AttendanceManagement.Infrastructure.DatabaseContext
                 Time_Out = new TimeSpan(17, 30, 0)
             });
 
+            builder.Entity<Salary>().HasData(new Salary()
+            {
+                SalaryId = Guid.Parse("735CDC2A-C28D-436C-A544-4247BFCDF27F"),
+                SalaryPerHour = 20000
+            });
+
+
             builder.Entity<Department>()
                 .HasMany(d => d.Users)
                 .WithOne(d => d.Department)
@@ -75,6 +84,14 @@ namespace AttendanceManagement.Infrastructure.DatabaseContext
             builder.Entity<DayOffUser>()
                 .Property(d => d.Status)
                 .HasDefaultValue(DayOffOptions.Waiting.ToString());
+
+            builder.Entity<SalaryPay>()
+                .HasKey(sp => new { sp.Month, sp.UserId });
+
+            builder.Entity<SalaryPay>()
+                .HasOne(sp => sp.User)
+                .WithMany(u => u.SalaryPays)
+                .HasForeignKey(sp => sp.UserId);
             
         }
     }

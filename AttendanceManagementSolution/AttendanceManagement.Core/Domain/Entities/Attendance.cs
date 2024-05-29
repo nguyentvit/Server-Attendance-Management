@@ -16,6 +16,8 @@ namespace AttendanceManagement.Core.Domain.Entities
         public DateTime Time { get; set; }
         [Required(ErrorMessage = "Status can't be blank")]
         public bool Status { get; set; } // true: in, false: out
+        [Required(ErrorMessage = "PathImg can't be blank")]
+        public int PathImg {  get; set; }
         public Guid UserId { get; set; }
         public ApplicationUser User { get; set; } = null!;
 

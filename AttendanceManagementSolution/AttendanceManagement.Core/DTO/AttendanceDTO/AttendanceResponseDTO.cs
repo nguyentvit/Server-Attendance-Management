@@ -1,4 +1,5 @@
 ﻿using AttendanceManagement.Core.Domain.Entities;
+using Microsoft.AspNetCore.Authentication;
 using System;
 
 namespace AttendanceManagement.Core.DTO.AttendanceDTO
@@ -11,7 +12,7 @@ namespace AttendanceManagement.Core.DTO.AttendanceDTO
         public Guid UserId { get; set; }
         public string UserName { get; set; } = string.Empty;
         public string UserEmail { get; set; } = string.Empty;
-
+        public string PathImg { get; set; }
         public override bool Equals(object? obj)
         {
             if (obj == null)
@@ -37,6 +38,7 @@ namespace AttendanceManagement.Core.DTO.AttendanceDTO
         public static AttendanceResponseDTO ToAttendanceResponse(this Attendance attendance)
         {
             var user = attendance.User;
+            var pathBase = "../Img/";
             return new AttendanceResponseDTO()
             {
                 AttendanceId = attendance.AttendanceId,
@@ -44,7 +46,8 @@ namespace AttendanceManagement.Core.DTO.AttendanceDTO
                 Status = attendance.Status,
                 UserEmail = user.Email,
                 UserId = user.Id,
-                UserName = user.PersonName
+                UserName = user.PersonName,
+                PathImg = Path.Combine(pathBase, user.Id + "_" + attendance.PathImg + ".jpg")
             };
         }
     }

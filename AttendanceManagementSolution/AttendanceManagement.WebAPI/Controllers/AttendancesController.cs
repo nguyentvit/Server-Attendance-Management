@@ -37,12 +37,19 @@ namespace AttendanceManagement.WebAPI.Controllers
             var attendances = await _attendanceService.GetAllAttendances();
             return Ok(attendances);
         }
+        [HttpGet("/last")]
+        [AllowAnonymous]
+        public async Task<ActionResult<AttendanceResponseDTO>> GetLast()
+        {
+            var attendances = await _attendanceService.GetLastAttendance();
+            return Ok(attendances);
+        }
         /// <summary>
         /// return departmentName, List users, List shift
         /// </summary>
         /// <param name="attendanceId"></param>
         /// <returns></returns>
-        [HttpGet("{attendanceId}")]
+        [HttpGet("attendance/{attendanceId}")]
         public async Task<ActionResult<AttendanceResponseDTO>> GetAttendance(Guid attendanceId)
         {
             var attendance = await _attendanceService.GetAttendance(attendanceId);
@@ -88,6 +95,11 @@ namespace AttendanceManagement.WebAPI.Controllers
             var attendances = await _attendanceService.GetAttendancesByDate(dateTime);
             return Ok(attendances);
         }
-            
+        [HttpGet("{userId}")]
+        public async Task<ActionResult<IEnumerable<AttendanceResponseDTO>>> GetAttendancesByUserId(Guid userId)
+        {
+            var attendaces = await _attendanceService.GetAttendancesByUserId(userId);
+            return Ok(attendaces);
+        }
     }
 }

@@ -9,10 +9,12 @@ namespace AttendanceManagement.Core.Identity
         public string PersonName { get; set; } = string.Empty;
         public string Address { get; set; } = string.Empty;
         public string Gender { get; set; } = string.Empty;
+        public DateTime? DateStart { get; set; }
         public Guid? DeparmentId {  get; set; }
         public Department? Department { get; set; }
         public ICollection<Attendance> Attendances { get; } = new List<Attendance>();
         public ICollection<DayOffUser> DayOffUsers { get; } = new List<DayOffUser>();
+        public ICollection<SalaryPay> SalaryPays { get; } = new List<SalaryPay>();
 
     }
 }

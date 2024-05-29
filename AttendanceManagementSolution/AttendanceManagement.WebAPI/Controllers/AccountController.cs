@@ -11,10 +11,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace AttendanceManagement.WebAPI.Controllers
 {
@@ -265,6 +267,13 @@ namespace AttendanceManagement.WebAPI.Controllers
                 ModelState.AddModelError("PhoneNumber", "Phone number is already in use");
             }
 
+            DateTime dateValue;
+            if (!DateTime.TryParseExact(registerDTO.DateStart, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out dateValue))
+            {
+                // Nếu không thành công, trả về BadRequest với thông báo lỗi
+                return BadRequest(new { error = "Invalid date format. Date must be in 'yyyy-MM-dd' format." });
+            }
+
             if (ModelState.ErrorCount > 0)
             {
                 var errorList = ModelState.ToDictionary(
@@ -289,7 +298,8 @@ namespace AttendanceManagement.WebAPI.Controllers
                 PersonName = registerDTO.PersonName,
                 Gender = registerDTO.Gender,
                 Address = registerDTO.Address,
-                DeparmentId = registerDTO.DepartmentId
+                DeparmentId = registerDTO.DepartmentId,
+                DateStart = dateValue
             };
 
             IdentityResult result = await _userManager.CreateAsync(user, registerDTO.Password);

@@ -169,18 +169,18 @@
             <param name="shiftUpdateDTO"></param>
             <returns></returns>
         </member>
-        <member name="T:AttendanceManagement.WebAPI.Controllers.UsersController">
+        <member name="T:AttendanceManagement.WebAPI.Controllers.UsersAdminController">
             <summary>
             
             </summary>
         </member>
-        <member name="M:AttendanceManagement.WebAPI.Controllers.UsersController.GetAllUsers">
+        <member name="M:AttendanceManagement.WebAPI.Controllers.UsersAdminController.GetAllUsers">
             <summary>
             
             </summary>
             <returns></returns>
         </member>
-        <member name="M:AttendanceManagement.WebAPI.Controllers.UsersController.GetUser(System.Guid)">
+        <member name="M:AttendanceManagement.WebAPI.Controllers.UsersAdminController.GetUser(System.Guid)">
             <summary>
             
             </summary>

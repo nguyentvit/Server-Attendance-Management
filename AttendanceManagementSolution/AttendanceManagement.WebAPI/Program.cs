@@ -16,6 +16,11 @@ using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
+//builder.WebHost.ConfigureKestrel(serverOptions =>
+//{
+//    serverOptions.Listen(System.Net.IPAddress.Parse("172.20.10.4"), 5126);
+//});
+
 // Add services to the container
 
 builder.Services.AddControllers(options =>
@@ -39,6 +44,10 @@ builder.Services.AddTransient<IDayOffsRepository, DayOffsRepository>();
 builder.Services.AddTransient<IDayOffService, DayOffService>();
 builder.Services.AddTransient<IDayOffUsersRepository, DayOffUsersRepository>();
 builder.Services.AddTransient<IWorkingStatusService, WorkingStatusService>();
+builder.Services.AddTransient<ISalariesRepository, SalariesRepository>();
+builder.Services.AddTransient<ISalaryService, SalaryService>();
+builder.Services.AddTransient<ISalaryPaysRepository, SalaryPaysRepository>();
+builder.Services.AddTransient<ISalaryPayService, SalaryPayService>();
 
 builder.Services.AddSignalR();
 
@@ -126,3 +135,4 @@ app.MapControllers();
 app.MapHub<AttendanceHub>("/Attendance");
 
 app.Run();
+
