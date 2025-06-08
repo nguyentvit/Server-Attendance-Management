@@ -69,7 +69,7 @@ namespace AttendanceManagement.Core.Services
             foreach (var user in users)
             {
                 DateTime time = DateTime.Now;
-                DateTime? dateStart = user.DateStart;
+                DateTime? dateStart = DateTime.Now;
                 if (dateStart.HasValue  && salaryCost != null)
                 {
                     DateTime iterationDate = dateStart.Value;
@@ -149,7 +149,7 @@ namespace AttendanceManagement.Core.Services
             foreach (var user in users)
             {
                 DateTime time = DateTime.Now;
-                DateTime? dateStart = user.DateStart;
+                DateTime? dateStart = DateTime.Now;
                 if (dateStart.HasValue  && salaryCost != null)
                 {
                     DateTime iterationDate = dateStart.Value;

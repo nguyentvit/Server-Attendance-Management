@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Pbl5\\Server\\Server-Attendance-Management\\AttendanceManagementSolution\\AttendanceManagement.WebAPI\\AttendanceManagement.WebAPI.csproj": {}
+    "E:\\hehe\\Server-Attendance-Management\\AttendanceManagementSolution\\AttendanceManagement.WebAPI\\AttendanceManagement.WebAPI.csproj": {}
   },
   "projects": {
-    "E:\\Pbl5\\Server\\Server-Attendance-Management\\AttendanceManagementSolution\\AttendanceManagement.Core\\AttendanceManagement.Core.csproj": {
+    "E:\\hehe\\Server-Attendance-Management\\AttendanceManagementSolution\\AttendanceManagement.Core\\AttendanceManagement.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Pbl5\\Server\\Server-Attendance-Management\\AttendanceManagementSolution\\AttendanceManagement.Core\\AttendanceManagement.Core.csproj",
+        "projectUniqueName": "E:\\hehe\\Server-Attendance-Management\\AttendanceManagementSolution\\AttendanceManagement.Core\\AttendanceManagement.Core.csproj",
         "projectName": "AttendanceManagement.Core",
-        "projectPath": "E:\\Pbl5\\Server\\Server-Attendance-Management\\AttendanceManagementSolution\\AttendanceManagement.Core\\AttendanceManagement.Core.csproj",
+        "projectPath": "E:\\hehe\\Server-Attendance-Management\\AttendanceManagementSolution\\AttendanceManagement.Core\\AttendanceManagement.Core.csproj",
         "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
-        "outputPath": "E:\\Pbl5\\Server\\Server-Attendance-Management\\AttendanceManagementSolution\\AttendanceManagement.Core\\obj\\",
+        "outputPath": "E:\\hehe\\Server-Attendance-Management\\AttendanceManagementSolution\\AttendanceManagement.Core\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
           "C:\\Users\\ASUS\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -39,7 +43,8 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        }
+        },
+        "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
         "net8.0": {
@@ -74,21 +79,25 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.201/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "E:\\Pbl5\\Server\\Server-Attendance-Management\\AttendanceManagementSolution\\AttendanceManagement.Infrastructure\\AttendanceManagement.Infrastructure.csproj": {
+    "E:\\hehe\\Server-Attendance-Management\\AttendanceManagementSolution\\AttendanceManagement.Infrastructure\\AttendanceManagement.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Pbl5\\Server\\Server-Attendance-Management\\AttendanceManagementSolution\\AttendanceManagement.Infrastructure\\AttendanceManagement.Infrastructure.csproj",
+        "projectUniqueName": "E:\\hehe\\Server-Attendance-Management\\AttendanceManagementSolution\\AttendanceManagement.Infrastructure\\AttendanceManagement.Infrastructure.csproj",
         "projectName": "AttendanceManagement.Infrastructure",
-        "projectPath": "E:\\Pbl5\\Server\\Server-Attendance-Management\\AttendanceManagementSolution\\AttendanceManagement.Infrastructure\\AttendanceManagement.Infrastructure.csproj",
+        "projectPath": "E:\\hehe\\Server-Attendance-Management\\AttendanceManagementSolution\\AttendanceManagement.Infrastructure\\AttendanceManagement.Infrastructure.csproj",
         "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
-        "outputPath": "E:\\Pbl5\\Server\\Server-Attendance-Management\\AttendanceManagementSolution\\AttendanceManagement.Infrastructure\\obj\\",
+        "outputPath": "E:\\hehe\\Server-Attendance-Management\\AttendanceManagementSolution\\AttendanceManagement.Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
           "C:\\Users\\ASUS\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -102,8 +111,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "E:\\Pbl5\\Server\\Server-Attendance-Management\\AttendanceManagementSolution\\AttendanceManagement.Core\\AttendanceManagement.Core.csproj": {
-                "projectPath": "E:\\Pbl5\\Server\\Server-Attendance-Management\\AttendanceManagementSolution\\AttendanceManagement.Core\\AttendanceManagement.Core.csproj"
+              "E:\\hehe\\Server-Attendance-Management\\AttendanceManagementSolution\\AttendanceManagement.Core\\AttendanceManagement.Core.csproj": {
+                "projectPath": "E:\\hehe\\Server-Attendance-Management\\AttendanceManagementSolution\\AttendanceManagement.Core\\AttendanceManagement.Core.csproj"
               }
             }
           }
@@ -117,7 +126,8 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        }
+        },
+        "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
         "net8.0": {
@@ -148,21 +158,25 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.201/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "E:\\Pbl5\\Server\\Server-Attendance-Management\\AttendanceManagementSolution\\AttendanceManagement.WebAPI\\AttendanceManagement.WebAPI.csproj": {
+    "E:\\hehe\\Server-Attendance-Management\\AttendanceManagementSolution\\AttendanceManagement.WebAPI\\AttendanceManagement.WebAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Pbl5\\Server\\Server-Attendance-Management\\AttendanceManagementSolution\\AttendanceManagement.WebAPI\\AttendanceManagement.WebAPI.csproj",
+        "projectUniqueName": "E:\\hehe\\Server-Attendance-Management\\AttendanceManagementSolution\\AttendanceManagement.WebAPI\\AttendanceManagement.WebAPI.csproj",
         "projectName": "AttendanceManagement.WebAPI",
-        "projectPath": "E:\\Pbl5\\Server\\Server-Attendance-Management\\AttendanceManagementSolution\\AttendanceManagement.WebAPI\\AttendanceManagement.WebAPI.csproj",
+        "projectPath": "E:\\hehe\\Server-Attendance-Management\\AttendanceManagementSolution\\AttendanceManagement.WebAPI\\AttendanceManagement.WebAPI.csproj",
         "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
-        "outputPath": "E:\\Pbl5\\Server\\Server-Attendance-Management\\AttendanceManagementSolution\\AttendanceManagement.WebAPI\\obj\\",
+        "outputPath": "E:\\hehe\\Server-Attendance-Management\\AttendanceManagementSolution\\AttendanceManagement.WebAPI\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
           "C:\\Users\\ASUS\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -176,11 +190,11 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "E:\\Pbl5\\Server\\Server-Attendance-Management\\AttendanceManagementSolution\\AttendanceManagement.Core\\AttendanceManagement.Core.csproj": {
-                "projectPath": "E:\\Pbl5\\Server\\Server-Attendance-Management\\AttendanceManagementSolution\\AttendanceManagement.Core\\AttendanceManagement.Core.csproj"
+              "E:\\hehe\\Server-Attendance-Management\\AttendanceManagementSolution\\AttendanceManagement.Core\\AttendanceManagement.Core.csproj": {
+                "projectPath": "E:\\hehe\\Server-Attendance-Management\\AttendanceManagementSolution\\AttendanceManagement.Core\\AttendanceManagement.Core.csproj"
               },
-              "E:\\Pbl5\\Server\\Server-Attendance-Management\\AttendanceManagementSolution\\AttendanceManagement.Infrastructure\\AttendanceManagement.Infrastructure.csproj": {
-                "projectPath": "E:\\Pbl5\\Server\\Server-Attendance-Management\\AttendanceManagementSolution\\AttendanceManagement.Infrastructure\\AttendanceManagement.Infrastructure.csproj"
+              "E:\\hehe\\Server-Attendance-Management\\AttendanceManagementSolution\\AttendanceManagement.Infrastructure\\AttendanceManagement.Infrastructure.csproj": {
+                "projectPath": "E:\\hehe\\Server-Attendance-Management\\AttendanceManagementSolution\\AttendanceManagement.Infrastructure\\AttendanceManagement.Infrastructure.csproj"
               }
             }
           }
@@ -194,7 +208,8 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        }
+        },
+        "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
         "net8.0": {
@@ -252,7 +267,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.201/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

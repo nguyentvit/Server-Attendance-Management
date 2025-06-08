@@ -11,3 +11,16 @@ E:\Pbl5\Server\Server-Attendance-Management\AttendanceManagementSolution\Attenda
 E:\Pbl5\Server\Server-Attendance-Management\AttendanceManagementSolution\AttendanceManagement.Core\obj\Debug\net8.0\refint\AttendanceManagement.Core.dll
 E:\Pbl5\Server\Server-Attendance-Management\AttendanceManagementSolution\AttendanceManagement.Core\obj\Debug\net8.0\AttendanceManagement.Core.pdb
 E:\Pbl5\Server\Server-Attendance-Management\AttendanceManagementSolution\AttendanceManagement.Core\obj\Debug\net8.0\ref\AttendanceManagement.Core.dll
+E:\hehe\Server-Attendance-Management\AttendanceManagementSolution\AttendanceManagement.Core\bin\Debug\net8.0\AttendanceManagement.Core.deps.json
+E:\hehe\Server-Attendance-Management\AttendanceManagementSolution\AttendanceManagement.Core\bin\Debug\net8.0\AttendanceManagement.Core.dll
+E:\hehe\Server-Attendance-Management\AttendanceManagementSolution\AttendanceManagement.Core\bin\Debug\net8.0\AttendanceManagement.Core.pdb
+E:\hehe\Server-Attendance-Management\AttendanceManagementSolution\AttendanceManagement.Core\obj\Debug\net8.0\AttendanceManagement.Core.csproj.AssemblyReference.cache
+E:\hehe\Server-Attendance-Management\AttendanceManagementSolution\AttendanceManagement.Core\obj\Debug\net8.0\AttendanceManagement.Core.GeneratedMSBuildEditorConfig.editorconfig
+E:\hehe\Server-Attendance-Management\AttendanceManagementSolution\AttendanceManagement.Core\obj\Debug\net8.0\AttendanceManagement.Core.AssemblyInfoInputs.cache
+E:\hehe\Server-Attendance-Management\AttendanceManagementSolution\AttendanceManagement.Core\obj\Debug\net8.0\AttendanceManagement.Core.AssemblyInfo.cs
+E:\hehe\Server-Attendance-Management\AttendanceManagementSolution\AttendanceManagement.Core\obj\Debug\net8.0\AttendanceManagement.Core.csproj.CoreCompileInputs.cache
+E:\hehe\Server-Attendance-Management\AttendanceManagementSolution\AttendanceManagement.Core\obj\Debug\net8.0\AttendanceManagement.Core.sourcelink.json
+E:\hehe\Server-Attendance-Management\AttendanceManagementSolution\AttendanceManagement.Core\obj\Debug\net8.0\AttendanceManagement.Core.dll
+E:\hehe\Server-Attendance-Management\AttendanceManagementSolution\AttendanceManagement.Core\obj\Debug\net8.0\refint\AttendanceManagement.Core.dll
+E:\hehe\Server-Attendance-Management\AttendanceManagementSolution\AttendanceManagement.Core\obj\Debug\net8.0\AttendanceManagement.Core.pdb
+E:\hehe\Server-Attendance-Management\AttendanceManagementSolution\AttendanceManagement.Core\obj\Debug\net8.0\ref\AttendanceManagement.Core.dll

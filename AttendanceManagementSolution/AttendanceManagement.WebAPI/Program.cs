@@ -70,7 +70,7 @@ builder.Services.AddCors(options =>
     {
         policyBuilder
             //.WithOrigins(builder.Configuration.GetSection("AllowedOrigins").Get<string[]>())
-            .WithOrigins("http://127.0.0.1:5501")
+            .WithOrigins("http://127.0.0.1:5500")
             .WithHeaders("Authorization", "origin", "accept", "content-type")
             .WithMethods("GET", "POST", "PUT", "DELETE")
             .AllowCredentials()

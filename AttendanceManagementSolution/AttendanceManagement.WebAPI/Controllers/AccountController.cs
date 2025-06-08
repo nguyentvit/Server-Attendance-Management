@@ -23,7 +23,7 @@ namespace AttendanceManagement.WebAPI.Controllers
     /// <summary>
     /// 
     /// </summary>
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     public class AccountController : CustomControllersAdminBase
     {
         private readonly UserManager<ApplicationUser> _userManager;
@@ -93,7 +93,7 @@ namespace AttendanceManagement.WebAPI.Controllers
                 UserName = registerDTO.Email,
                 PersonName = registerDTO.PersonName,
                 Gender = registerDTO.Gender,
-                Address = registerDTO.Address
+                Address = registerDTO.Address,
             };
 
             IdentityResult result = await _userManager.CreateAsync(user, registerDTO.Password);
@@ -299,7 +299,6 @@ namespace AttendanceManagement.WebAPI.Controllers
                 Gender = registerDTO.Gender,
                 Address = registerDTO.Address,
                 DeparmentId = registerDTO.DepartmentId,
-                DateStart = dateValue
             };
 
             IdentityResult result = await _userManager.CreateAsync(user, registerDTO.Password);

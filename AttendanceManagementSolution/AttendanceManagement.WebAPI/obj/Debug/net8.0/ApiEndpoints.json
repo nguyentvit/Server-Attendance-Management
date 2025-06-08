@@ -1,0 +1,813 @@
+[
+  {
+    "ContainingType": "AttendanceManagement.WebAPI.Controllers.AccountController",
+    "Method": "PostLogin",
+    "RelativePath": "api/admin/Account/login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "loginDTO",
+        "Type": "AttendanceManagement.Core.DTO.CustomDTO.LoginDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AttendanceManagement.WebAPI.Controllers.AccountController",
+    "Method": "GetLogout",
+    "RelativePath": "api/admin/Account/logout",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AttendanceManagement.WebAPI.Controllers.AccountController",
+    "Method": "PostRegister",
+    "RelativePath": "api/admin/Account/register",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "registerDTO",
+        "Type": "AttendanceManagement.Core.DTO.CustomDTO.RegisterDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "AttendanceManagement.Core.Identity.ApplicationUser",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "AttendanceManagement.WebAPI.Controllers.AccountController",
+    "Method": "PostRegisterUser",
+    "RelativePath": "api/admin/Account/registerUser",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "registerDTO",
+        "Type": "AttendanceManagement.Core.DTO.CustomDTO.RegisterDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "AttendanceManagement.Core.Identity.ApplicationUser",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "AttendanceManagement.WebAPI.Controllers.AttendancesController",
+    "Method": "GetAllAttendance",
+    "RelativePath": "api/admin/Attendances",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[AttendanceManagement.Core.DTO.AttendanceDTO.AttendanceResponseDTO, AttendanceManagement.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "AttendanceManagement.WebAPI.Controllers.AttendancesController",
+    "Method": "AddAttendance",
+    "RelativePath": "api/admin/Attendances",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "attendanceAddDTO",
+        "Type": "AttendanceManagement.Core.DTO.AttendanceDTO.AttendanceAddDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "AttendanceManagement.Core.DTO.AttendanceDTO.AttendanceResponseDTO",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "AttendanceManagement.WebAPI.Controllers.AttendancesController",
+    "Method": "GetAttendancesByUserId",
+    "RelativePath": "api/admin/Attendances/{userId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[AttendanceManagement.Core.DTO.AttendanceDTO.AttendanceResponseDTO, AttendanceManagement.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "AttendanceManagement.WebAPI.Controllers.AttendancesController",
+    "Method": "GetAttendance",
+    "RelativePath": "api/admin/Attendances/attendance/{attendanceId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "attendanceId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "AttendanceManagement.Core.DTO.AttendanceDTO.AttendanceResponseDTO",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "AttendanceManagement.WebAPI.Controllers.AttendancesController",
+    "Method": "GetHeHe",
+    "RelativePath": "api/admin/Attendances/date/{date}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "date",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[AttendanceManagement.Core.DTO.AttendanceDTO.AttendanceResponseDTO, AttendanceManagement.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "AttendanceManagement.WebAPI.Controllers.DayOffAdminController",
+    "Method": "GetAllDayOffs",
+    "RelativePath": "api/admin/DayOffAdmin",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[AttendanceManagement.Core.DTO.DayOffDTO.DayOffResponseAdminDTO, AttendanceManagement.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "AttendanceManagement.WebAPI.Controllers.DayOffAdminController",
+    "Method": "GetDayOffByDateAndUserId",
+    "RelativePath": "api/admin/DayOffAdmin/{date}/{userId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "date",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "userId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "AttendanceManagement.Core.DTO.DayOffDTO.DayOffAddResponseDTO",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "AttendanceManagement.WebAPI.Controllers.DayOffAdminController",
+    "Method": "UpdateDayOff",
+    "RelativePath": "api/admin/DayOffAdmin/{date}/{userId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "date",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "userId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "dayOffUpdateAdminDTO",
+        "Type": "AttendanceManagement.Core.DTO.DayOffDTO.DayOffUpdateAdminDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "AttendanceManagement.Core.DTO.DayOffDTO.DayOffAddResponseDTO",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "AttendanceManagement.WebAPI.Controllers.DayOffAdminController",
+    "Method": "GetDayOffsByDate",
+    "RelativePath": "api/admin/DayOffAdmin/date/{date}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "date",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[AttendanceManagement.Core.DTO.DayOffDTO.DayOffResponseAdminDTO, AttendanceManagement.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "AttendanceManagement.WebAPI.Controllers.DayOffAdminController",
+    "Method": "GetDayOffsByUser",
+    "RelativePath": "api/admin/DayOffAdmin/user/{userId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[AttendanceManagement.Core.DTO.DayOffDTO.DayOffResponseAdminDTO, AttendanceManagement.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "AttendanceManagement.WebAPI.Controllers.DepartmentsController",
+    "Method": "GetAllDepartments",
+    "RelativePath": "api/admin/Departments",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[AttendanceManagement.Core.DTO.DepartmentDTO.DepartmentResponseDTO, AttendanceManagement.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "AttendanceManagement.WebAPI.Controllers.DepartmentsController",
+    "Method": "AddDepartment",
+    "RelativePath": "api/admin/Departments",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "departmentAddDTO",
+        "Type": "AttendanceManagement.Core.DTO.DepartmentDTO.DepartmentAddDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "AttendanceManagement.Core.DTO.DepartmentDTO.DepartmentResponseDTO",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "AttendanceManagement.WebAPI.Controllers.DepartmentsController",
+    "Method": "GetDepartment",
+    "RelativePath": "api/admin/Departments/{departmentId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "departmentId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "AttendanceManagement.Core.DTO.DepartmentDTO.DepartmentResponseDTO",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "AttendanceManagement.WebAPI.Controllers.DepartmentsController",
+    "Method": "UpdateDepartment",
+    "RelativePath": "api/admin/Departments/{departmentId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "departmentId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "departmentUpdate",
+        "Type": "AttendanceManagement.Core.DTO.DepartmentDTO.DepartmentUpdateDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "AttendanceManagement.Core.DTO.DepartmentDTO.DepartmentResponseDTO",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "AttendanceManagement.WebAPI.Controllers.DepartmentsController",
+    "Method": "DeleteDeparment",
+    "RelativePath": "api/admin/Departments/{departmentId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "departmentId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "AttendanceManagement.Core.DTO.DepartmentDTO.DepartmentResponseDTO",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "AttendanceManagement.WebAPI.Controllers.SalaryController",
+    "Method": "GetSalaries",
+    "RelativePath": "api/admin/Salary",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[AttendanceManagement.Core.DTO.SalaryDTO.SalaryResponseDTO, AttendanceManagement.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "AttendanceManagement.WebAPI.Controllers.SalaryController",
+    "Method": "UpdateSalary",
+    "RelativePath": "api/admin/Salary/{salaryId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "salaryId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "salaryUpdate",
+        "Type": "AttendanceManagement.Core.DTO.SalaryDTO.SalaryUpdateDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "AttendanceManagement.Core.DTO.SalaryDTO.SalaryResponseDTO",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "AttendanceManagement.WebAPI.Controllers.SalaryPayController",
+    "Method": "GetSalaryPays",
+    "RelativePath": "api/admin/SalaryPay",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[AttendanceManagement.Core.DTO.SalaryPayDTO.SalaryPayResponseDTO, AttendanceManagement.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "AttendanceManagement.WebAPI.Controllers.SalaryPayController",
+    "Method": "GetSalaryPaysByDate",
+    "RelativePath": "api/admin/SalaryPay/{date}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "date",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[AttendanceManagement.Core.DTO.SalaryPayDTO.SalaryPayResponseDTO, AttendanceManagement.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "AttendanceManagement.WebAPI.Controllers.ShiftsController",
+    "Method": "GetAllShifts",
+    "RelativePath": "api/admin/Shifts",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[AttendanceManagement.Core.DTO.ShiftDTO.ShiftResponseDTO, AttendanceManagement.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "AttendanceManagement.WebAPI.Controllers.ShiftsController",
+    "Method": "GetShift",
+    "RelativePath": "api/admin/Shifts/{shiftId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "shiftId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "AttendanceManagement.Core.DTO.ShiftDTO.ShiftResponseDTO",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "AttendanceManagement.WebAPI.Controllers.ShiftsController",
+    "Method": "PutShift",
+    "RelativePath": "api/admin/Shifts/{shiftId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "shiftId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "shiftUpdateDTO",
+        "Type": "AttendanceManagement.Core.DTO.ShiftDTO.ShiftUpdateDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "AttendanceManagement.Core.DTO.ShiftDTO.ShiftResponseDTO",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "AttendanceManagement.WebAPI.Controllers.UsersAdminController",
+    "Method": "GetAllUsers",
+    "RelativePath": "api/admin/UsersAdmin",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[AttendanceManagement.Core.DTO.UserDTO.UserReponse, AttendanceManagement.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "AttendanceManagement.WebAPI.Controllers.UsersAdminController",
+    "Method": "GetUser",
+    "RelativePath": "api/admin/UsersAdmin/{userId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "AttendanceManagement.Core.DTO.UserDTO.UserResponseWithAttendance",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "AttendanceManagement.WebAPI.Controllers.WorkingStatusAdminController",
+    "Method": "GetWorkingStatusAllUsers",
+    "RelativePath": "api/admin/WorkingStatusAdmin",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[AttendanceManagement.Core.DTO.WorkingStatusDTO.WorkingStatusReponseDTO, AttendanceManagement.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "AttendanceManagement.WebAPI.Controllers.WorkingStatusAdminController",
+    "Method": "GetWorkingStatusUser",
+    "RelativePath": "api/admin/WorkingStatusAdmin/{userId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "AttendanceManagement.Core.DTO.WorkingStatusDTO.WorkingStatusReponseDTO",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "AttendanceManagement.WebAPI.Controllers.DayOffUserController",
+    "Method": "AddDayOff",
+    "RelativePath": "api/user/DayOffUser",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dayOffAddDTO",
+        "Type": "AttendanceManagement.Core.DTO.DayOffDTO.DayOffAddDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "AttendanceManagement.Core.DTO.DayOffDTO.DayOffAddResponseDTO",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "AttendanceManagement.WebAPI.Controllers.DayOffUserController",
+    "Method": "GetAllDayOffUser",
+    "RelativePath": "api/user/DayOffUser",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[AttendanceManagement.Core.DTO.DayOffDTO.DayOffAddResponseDTO, AttendanceManagement.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "AttendanceManagement.WebAPI.Controllers.DayOffUserController",
+    "Method": "GetDayOffByDate",
+    "RelativePath": "api/user/DayOffUser/{date}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "date",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "AttendanceManagement.Core.DTO.DayOffDTO.DayOffAddResponseDTO",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "AttendanceManagement.WebAPI.Controllers.DayOffUserController",
+    "Method": "UpdateDayOff",
+    "RelativePath": "api/user/DayOffUser/{date}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "date",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "dayOffUpdateUserDTO",
+        "Type": "AttendanceManagement.Core.DTO.DayOffDTO.DayOffUpdateUserDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "AttendanceManagement.Core.DTO.DayOffDTO.DayOffAddResponseDTO",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "AttendanceManagement.WebAPI.Controllers.UsersController",
+    "Method": "GetUser",
+    "RelativePath": "api/user/Users",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "AttendanceManagement.Core.DTO.UserDTO.UserResponseWithAttendance",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "AttendanceManagement.WebAPI.Controllers.AttendancesController",
+    "Method": "GetLast",
+    "RelativePath": "last",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "AttendanceManagement.Core.DTO.AttendanceDTO.AttendanceResponseDTO",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  }
+]
