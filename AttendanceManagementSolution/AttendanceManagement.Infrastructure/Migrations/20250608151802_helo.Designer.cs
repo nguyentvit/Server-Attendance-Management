@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AttendanceManagement.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240501193911_updateDepartmentTablever2")]
-    partial class updateDepartmentTablever2
+    [Migration("20250608151802_helo")]
+    partial class helo
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,70 @@ namespace AttendanceManagement.Infrastructure.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("AttendanceManagement.Core.Domain.Entities.Attendance", b =>
+                {
+                    b.Property<Guid>("AttendanceId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("PathImg")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("Time")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("AttendanceId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Attendances");
+                });
+
+            modelBuilder.Entity("AttendanceManagement.Core.Domain.Entities.DayOff", b =>
+                {
+                    b.Property<Guid>("DayOffId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("DayOffId");
+
+                    b.ToTable("DayOffs");
+                });
+
+            modelBuilder.Entity("AttendanceManagement.Core.Domain.Entities.DayOffUser", b =>
+                {
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("DayOffId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Reason")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(max)")
+                        .HasDefaultValue("Waiting");
+
+                    b.HasKey("UserId", "DayOffId");
+
+                    b.HasIndex("DayOffId");
+
+                    b.ToTable("DayOffUsers");
+                });
 
             modelBuilder.Entity("AttendanceManagement.Core.Domain.Entities.Department", b =>
                 {
@@ -49,6 +113,88 @@ namespace AttendanceManagement.Infrastructure.Migrations
                         {
                             DepartmentId = new Guid("ef90fd8f-aaea-444e-b3a0-78b56d6c51f8"),
                             DepartmentName = "Accounting"
+                        });
+                });
+
+            modelBuilder.Entity("AttendanceManagement.Core.Domain.Entities.Salary", b =>
+                {
+                    b.Property<Guid>("SalaryId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<double>("SalaryPerHour")
+                        .HasColumnType("float");
+
+                    b.HasKey("SalaryId");
+
+                    b.ToTable("Salaries");
+
+                    b.HasData(
+                        new
+                        {
+                            SalaryId = new Guid("735cdc2a-c28d-436c-a544-4247bfcdf27f"),
+                            SalaryPerHour = 20000.0
+                        });
+                });
+
+            modelBuilder.Entity("AttendanceManagement.Core.Domain.Entities.SalaryPay", b =>
+                {
+                    b.Property<DateTime>("Month")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<double>("MoneyPay")
+                        .HasColumnType("float");
+
+                    b.Property<double>("MoneyReceive")
+                        .HasColumnType("float");
+
+                    b.Property<double>("SumaryHour")
+                        .HasColumnType("float");
+
+                    b.HasKey("Month", "UserId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("SalaryPays");
+                });
+
+            modelBuilder.Entity("AttendanceManagement.Core.Domain.Entities.Shift", b =>
+                {
+                    b.Property<Guid>("ShiftId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ShiftName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<TimeSpan>("Time_In")
+                        .HasColumnType("time");
+
+                    b.Property<TimeSpan>("Time_Out")
+                        .HasColumnType("time");
+
+                    b.HasKey("ShiftId");
+
+                    b.ToTable("Shifts");
+
+                    b.HasData(
+                        new
+                        {
+                            ShiftId = new Guid("13a27559-42be-4984-8e5c-55331f5a039f"),
+                            ShiftName = "Morning",
+                            Time_In = new TimeSpan(0, 7, 30, 0, 0),
+                            Time_Out = new TimeSpan(0, 11, 30, 0, 0)
+                        },
+                        new
+                        {
+                            ShiftId = new Guid("3a6ffedc-25d6-45da-8354-b7880eced953"),
+                            ShiftName = "Afternoon",
+                            Time_In = new TimeSpan(0, 14, 0, 0, 0),
+                            Time_Out = new TimeSpan(0, 17, 30, 0, 0)
                         });
                 });
 
@@ -96,6 +242,9 @@ namespace AttendanceManagement.Infrastructure.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("DateStart")
+                        .HasColumnType("datetime2");
 
                     b.Property<Guid?>("DeparmentId")
                         .HasColumnType("uniqueidentifier");
@@ -266,6 +415,47 @@ namespace AttendanceManagement.Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("AttendanceManagement.Core.Domain.Entities.Attendance", b =>
+                {
+                    b.HasOne("AttendanceManagement.Core.Identity.ApplicationUser", "User")
+                        .WithMany("Attendances")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("AttendanceManagement.Core.Domain.Entities.DayOffUser", b =>
+                {
+                    b.HasOne("AttendanceManagement.Core.Domain.Entities.DayOff", "DayOff")
+                        .WithMany("DayOffUsers")
+                        .HasForeignKey("DayOffId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("AttendanceManagement.Core.Identity.ApplicationUser", "User")
+                        .WithMany("DayOffUsers")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("DayOff");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("AttendanceManagement.Core.Domain.Entities.SalaryPay", b =>
+                {
+                    b.HasOne("AttendanceManagement.Core.Identity.ApplicationUser", "User")
+                        .WithMany("SalaryPays")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("AttendanceManagement.Core.Identity.ApplicationUser", b =>
                 {
                     b.HasOne("AttendanceManagement.Core.Domain.Entities.Department", "Department")
@@ -326,9 +516,23 @@ namespace AttendanceManagement.Infrastructure.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("AttendanceManagement.Core.Domain.Entities.DayOff", b =>
+                {
+                    b.Navigation("DayOffUsers");
+                });
+
             modelBuilder.Entity("AttendanceManagement.Core.Domain.Entities.Department", b =>
                 {
                     b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("AttendanceManagement.Core.Identity.ApplicationUser", b =>
+                {
+                    b.Navigation("Attendances");
+
+                    b.Navigation("DayOffUsers");
+
+                    b.Navigation("SalaryPays");
                 });
 #pragma warning restore 612, 618
         }

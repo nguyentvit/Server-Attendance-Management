@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "0UPZF1uniiJKMo9H1PSqMG29MYNaA3szOyOufpdeXKPFSjVy6G28O7n8HfuduDoCyc+2/FVFRmRv/BHCprLyBQ==",
+  "dgSpecHash": "3RW2YphQqjU=",
   "success": true,
-  "projectFilePath": "E:\\Pbl5\\Server\\Server-Attendance-Management\\AttendanceManagementSolution\\AttendanceManagement.WebAPI\\AttendanceManagement.WebAPI.csproj",
+  "projectFilePath": "E:\\Server-Attendance-Management\\AttendanceManagementSolution\\AttendanceManagement.WebAPI\\AttendanceManagement.WebAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ASUS\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\ASUS\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",

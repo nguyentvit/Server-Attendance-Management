@@ -16,10 +16,10 @@ using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
-//builder.WebHost.ConfigureKestrel(serverOptions =>
-//{
-//    serverOptions.Listen(System.Net.IPAddress.Parse("172.20.10.4"), 5126);
-//});
+builder.WebHost.ConfigureKestrel(serverOptions =>
+{
+    serverOptions.Listen(System.Net.IPAddress.Parse("172.20.10.6"), 5126);
+});
 
 // Add services to the container
 
@@ -70,7 +70,7 @@ builder.Services.AddCors(options =>
     {
         policyBuilder
             //.WithOrigins(builder.Configuration.GetSection("AllowedOrigins").Get<string[]>())
-            .WithOrigins("http://127.0.0.1:5501")
+            .WithOrigins("http://127.0.0.1:5500")
             .WithHeaders("Authorization", "origin", "accept", "content-type")
             .WithMethods("GET", "POST", "PUT", "DELETE")
             .AllowCredentials()

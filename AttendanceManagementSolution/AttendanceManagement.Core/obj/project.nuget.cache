@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "doSxWy3rV7wRecIf50JmePlMlTjFXl7Gx9w7Wya+LASVMKsmkzTLppmnUzQ3usQSxZ0s25Udla5mIM7Q41enUQ==",
+  "dgSpecHash": "Lf3pB6vIsDU=",
   "success": true,
-  "projectFilePath": "E:\\Pbl5\\Server\\Server-Attendance-Management\\AttendanceManagementSolution\\AttendanceManagement.Core\\AttendanceManagement.Core.csproj",
+  "projectFilePath": "E:\\Server-Attendance-Management\\AttendanceManagementSolution\\AttendanceManagement.Core\\AttendanceManagement.Core.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ASUS\\.nuget\\packages\\microsoft.aspnetcore.antiforgery\\2.2.0\\microsoft.aspnetcore.antiforgery.2.2.0.nupkg.sha512",
     "C:\\Users\\ASUS\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.2.0\\microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",

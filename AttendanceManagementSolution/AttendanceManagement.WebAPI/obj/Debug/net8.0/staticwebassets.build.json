@@ -1,11 +1,12 @@
 {
   "Version": 1,
-  "Hash": "e6uEWnIp21ByzQccONf+1WZjMocXE8W9kKQtdg2T2OM=",
+  "Hash": "QGBzcCpTTZO/1KN4o8X/ijd7gpkG3PzkESiW40CJ7DQ=",
   "Source": "AttendanceManagement.WebAPI",
   "BasePath": "_content/AttendanceManagement.WebAPI",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
   "DiscoveryPatterns": [],
-  "Assets": []
+  "Assets": [],
+  "Endpoints": []
 }
